@@ -62,13 +62,13 @@
 
             flex-wrap: wrap;
 
-            justify-content: space-around;
+            justify-content: center;
 
-            gap: 15px; /* Adjusted gap */
+            gap: 20px;
 
             margin-bottom: 30px;
 
-            max-width: 950px;
+            max-width: 720px;
 
             padding: 0 10px;
 
@@ -84,7 +84,7 @@
 
         #selectionContainer > div {
 
-            flex: 1 1 calc(25% - 15px); /* Target 4 columns, adjust for gap */
+            flex: 0 1 220px;
 
             min-width: 170px;
 
@@ -103,6 +103,10 @@
         #selectionContainer:not(.hidden) label { display: block; }
 
 
+
+        #trimHeading { text-align: center; margin: 25px auto 10px; font-size: 1.2em; color: #fff; font-weight: 600; letter-spacing: 0.5px; }
+
+        #trims, .trim-selector-wrapper { display: none !important; }
 
         select {
 
@@ -906,7 +910,7 @@
 
         <div><select id="models" class="hidden"> <option value="">--Select Model--</option> </select></div>
 
-        <div><select id="trims" class="hidden"> <option value="default">--Select Trim--</option> </select></div>
+        <div class="trim-selector-wrapper"><select id="trims" class="hidden"> <option value="default">--Select Trim--</option> </select></div>
 
     </div>
 
@@ -952,6 +956,8 @@
 
         <div id="error-message"></div>
 
+        <h3 id="trimHeading">Choose Your Trim</h3>
+
         <div id="image-container"></div>
 
     </div>
@@ -47995,46 +48001,43 @@ const ProductLinks = {
 
 
              function updateProgress() {
+                let progress = 0;
+                let text = "0% Complete";
 
-                let progress = 0; let text = "0% Complete";
+                const yearValue = yearSelect.value;
+                const makerValue = makersSelect.value;
+                const modelValue = modelsSelect.value;
 
-                 const formIsVisible = contactFormContainer.classList.contains('visible');
+                const yearValid = yearValue && yearValue !== "" && yearValue !== "DON'T SEE MY OPTION";
+                const makeValid = !makersSelect.classList.contains('hidden') && makerValue && makerValue !== "" && makerValue !== "DON'T SEE MY OPTION";
+                const modelValid = !modelsSelect.classList.contains('hidden') && modelValue && modelValue !== "" && modelValue !== "DON'T SEE MY OPTION";
 
-                 const postSelectionAreaVisible = !postSelectionButtonsContainer.classList.contains('hidden') || !targetSection.classList.contains('hidden');
+                const formIsVisible = contactFormContainer.classList.contains('visible');
+                const postSelectionAreaVisible = !postSelectionButtonsContainer.classList.contains('hidden') || !targetSection.classList.contains('hidden');
+
+                if (formIsVisible || postSelectionAreaVisible) {
+                    progress = 100;
+                    text = window.selectedProductUrl ? "Selection Complete" : "Choose Design";
+                } else {
+                    if (yearValid) { progress = 25; text = "25% Complete"; }
+                    if (makeValid) { progress = 50; text = "50% Complete"; }
+                    if (modelValid) { progress = 75; text = "75% Complete"; }
+                }
+
+                if (window.selectedProductUrl) {
+                    progress = 100;
+                    text = "100% Complete";
+                }
+
+                progressBar.style.width = `${progress}%`;
+                progressBarContainer.setAttribute('aria-valuenow', progress);
+                progressText.textContent = text;
+            }
 
 
-
-                 if (formIsVisible) { progress = 100; text = "Enter Contact Info"; }
-
-                 else if (postSelectionAreaVisible) { progress = 100; text = "Selection Complete"; }
-
-                 else {
-
-                    const yearValue = yearSelect.value; const makerValue = makersSelect.value;
-
-                    const modelValue = modelsSelect.value; const trimValue = trimsSelect.value;
-
-                    if (yearValue && yearValue !== "" && yearValue !== "DON'T SEE MY OPTION") { progress = 25; text = "25% Complete";
-
-                        if (!makersSelect.classList.contains('hidden') && makerValue && makerValue !== "" && makerValue !== "DON'T SEE MY OPTION") { progress = 50; text = "50% Complete";
-
-                            if (!modelsSelect.classList.contains('hidden') && modelValue && modelValue !== "" && modelValue !== "DON'T SEE MY OPTION") { progress = 75; text = "75% Complete";
-
-                                if (!trimsSelect.classList.contains('hidden') && trimValue && trimValue !== "default" && trimValue !== "DON'T SEE MY OPTION") { progress = 100; text = "100% Complete"; }
-
-                            }
-
-                        }
-
-                    }
-
-                 }
-
-                 progressBar.style.width = `${progress}%`;
-
-                 progressBarContainer.setAttribute('aria-valuenow', progress);
-
-                 progressText.textContent = text;
+                progressBar.style.width = `${progress}%`;
+                progressBarContainer.setAttribute('aria-valuenow', progress);
+                progressText.textContent = text;
 
              }
 
@@ -48044,13 +48047,11 @@ const ProductLinks = {
 
                 const yearValue = yearSelect.value; const makerValue = makersSelect.value;
 
-                const modelValue = modelsSelect.value; const trimsSelectValue = trimsSelect.value;
+                const modelValue = modelsSelect.value;
 
                 const formIsVisible = contactFormContainer.classList.contains('visible');
 
                 const imageGridIsVisible = !targetSection.classList.contains('hidden');
-
-
 
                 if (formIsVisible || imageGridIsVisible) {
 
@@ -48064,15 +48065,11 @@ const ProductLinks = {
 
                 primaryActionButtonsContainer.classList.remove('hidden-container');
 
+                const yearValid = yearValue && yearValue !== "" && yearValue !== "DON'T SEE MY OPTION";
+                const makeValid = !makersSelect.classList.contains('hidden') && makerValue && makerValue !== "" && makerValue !== "DON'T SEE MY OPTION";
+                const modelValid = !modelsSelect.classList.contains('hidden') && modelValue && modelValue !== "" && modelValue !== "DON'T SEE MY OPTION";
 
-
-                const canProceedToNextStep = yearValue && yearValue !== "" && yearValue !== "DON'T SEE MY OPTION" &&
-
-                                           !makersSelect.classList.contains('hidden') && makerValue && makerValue !== "" && makerValue !== "DON'T SEE MY OPTION" &&
-
-                                           !modelsSelect.classList.contains('hidden') && modelValue && modelValue !== "" && modelValue !== "DON'T SEE MY OPTION" &&
-
-                                           !trimsSelect.classList.contains('hidden') && trimsSelectValue && trimsSelectValue !== "default" && trimsSelectValue !== "DON'T SEE MY OPTION";
+                const canProceedToNextStep = yearValid && makeValid && modelValid;
 
                 setVisibility(nextButton, canProceedToNextStep);
 
@@ -48138,7 +48135,7 @@ const ProductLinks = {
 
                             // Finally, handle trim based on its own value
 
-                            if (finalTrim === "DON'T SEE MY OPTION" || finalTrim === "" || finalTrim === "default" || trimsSelect.classList.contains('hidden')) {
+                            if (finalTrim === "DON'T SEE MY OPTION" || finalTrim === "" || finalTrim === "default") {
 
                                 displayTrim.value = "Not Listed/Specified";
 
@@ -48327,25 +48324,6 @@ const ProductLinks = {
                  updatePrimaryActionButtonsVisibility(); updateProgress();
 
             });
-
-             trimsSelect.addEventListener('change', () => {
-
-                 if (trimsSelect.value === "DON'T SEE MY OPTION") { window.selectedProductUrl = ''; showContactFormDirectly(); return; }
-
-                 if (!trimsSelect.value || trimsSelect.value === 'default') {
-
-                     window.selectedProductUrl = '';
-
-                 } else {
-
-                     window.selectedProductUrl = resolveProductLink(yearSelect.value, makersSelect.value, modelsSelect.value, trimsSelect.value);
-
-                 }
-
-                 updatePrimaryActionButtonsVisibility(); updateProgress();
-
-            });
-
 
 
              nextButton.addEventListener('click', function() {
