@@ -47880,6 +47880,69 @@ const ProductLinks = {
 
             window.selectedProductUrl = window.selectedProductUrl || '';
 
+         function normalizeDesignToken(value) {
+             return (value || '').toString().replace(/design\s*#/i, '').trim().replace(/\s+/g, ' ').toUpperCase();
+         }
+
+         function buildDesignTokens(designNumber) {
+             const base = normalizeDesignToken(designNumber);
+             if (!base) return new Set();
+             const compact = base.replace(/\s+/g, '');
+             const tokens = new Set();
+             const add = (val) => { if (val) tokens.add(val); };
+             add(base);
+             add(compact);
+             add(`CUSTOM DESIGN ${base}`);
+             add(`CUSTOM DESIGN ${compact}`);
+             add(`FACTORY DESIGN ${base}`);
+             add(`FACTORY DESIGN ${compact}`);
+             add(base.replace(/^DESIGN\s+/i, ''));
+             add(base.replace(/^CUSTOM\s+DESIGN\s+/i, ''));
+             add(base.replace(/^FACTORY\s+DESIGN\s+/i, ''));
+             return tokens;
+         }
+
+         function buildTrimTokens(trim) {
+             const normalized = (trim || '').toString().replace(/\s+/g, ' ').trim().toUpperCase();
+             if (!normalized) return [];
+             const compact = normalized.replace(/\s+/g, '');
+             const customRemoved = normalized.replace(/^CUSTOM\s+DESIGN\s+/i, '').trim();
+             const factoryRemoved = normalized.replace(/^FACTORY\s+DESIGN\s+/i, '').trim();
+             const tokens = new Set([normalized, compact, customRemoved.toUpperCase(), factoryRemoved.toUpperCase(), customRemoved.replace(/\s+/g, ''), factoryRemoved.replace(/\s+/g, '')]);
+             return Array.from(tokens).filter(Boolean);
+         }
+
+         function findTrimForDesign(year, make, model, designNumber) {
+             if (!year || !make || !model || !designNumber) return '';
+             const trims = (((MakeTrim[year] || {})[make] || {})[model]) || [];
+             if (!trims.length) return '';
+             const designTokens = buildDesignTokens(designNumber);
+             for (const trim of trims) {
+                 const trimTokens = buildTrimTokens(trim);
+                 if (trimTokens.some(token => designTokens.has(token))) {
+                     return trim;
+                 }
+             }
+             return '';
+         }
+
+         function applyDesignSelection(designNumber) {
+             const year = yearSelect.value;
+             const make = makersSelect.value;
+             const model = modelsSelect.value;
+             if (!year || !make || !model) {
+                 window.selectedProductUrl = resolveProductLink(year, make, model, trimsSelect.value);
+                 return;
+             }
+             const matchedTrim = designNumber ? findTrimForDesign(year, make, model, designNumber) : '';
+             if (matchedTrim) {
+                 trimsSelect.value = matchedTrim;
+                 window.selectedProductUrl = resolveProductLink(year, make, model, matchedTrim);
+             } else {
+                 window.selectedProductUrl = resolveProductLink(year, make, model, trimsSelect.value);
+             }
+         }
+
 
 
 
@@ -48640,6 +48703,8 @@ const ProductLinks = {
 
 
              function handleChooseDesign(designNumber) {
+
+                applyDesignSelection(designNumber);
 
                 showContactFormDirectly(designNumber);
 
