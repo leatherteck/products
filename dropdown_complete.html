@@ -2504,9 +2504,14 @@ button#contactUsButton:hover:not(:disabled) {
 
 
 
-           function handleChooseDesign(designNumber) {
+           function handleChooseDesign(designNumber, trimName = null) {
 
               applyDesignSelection(designNumber);
+
+              // Store the trim name from the selected product
+              if (trimName) {
+                  window.selectedTrim = trimName;
+              }
 
               showContactFormDirectly(designNumber);
 
@@ -2562,7 +2567,9 @@ button#contactUsButton:hover:not(:disabled) {
 
                    const buttonElement = event.target.closest('.choose-design-grid-btn');
 
-                   if (buttonElement) { handleChooseDesign(buttonElement.dataset.designNumber); }
+                   if (buttonElement) {
+                       handleChooseDesign(buttonElement.dataset.designNumber, buttonElement.dataset.trimName);
+                   }
 
                    else if (imgElement && imgElement.closest('.grid-item')) {
                        openModal(imgElement.src, imgElement.dataset.designNumber, imgElement.dataset.trimName);
@@ -2579,10 +2586,11 @@ button#contactUsButton:hover:not(:disabled) {
               modalImage.addEventListener('click', function() {
 
                   const designNum = modalChooseDesignButton.dataset.designNumber;
+                  const trimName = modalChooseDesignButton.dataset.trimName;
 
                   if (designNum && modalOverlay.classList.contains('modal-active')) {
 
-                      handleChooseDesign(designNum);
+                      handleChooseDesign(designNum, trimName);
 
                   }
 
@@ -2598,7 +2606,9 @@ button#contactUsButton:hover:not(:disabled) {
 
            document.addEventListener('keydown', function(event) { if (event.key === 'Escape' && modalOverlay && modalOverlay.classList.contains('modal-active')) closeModal(); });
 
-           if (modalChooseDesignButton) modalChooseDesignButton.addEventListener('click', function() { if (this.dataset.designNumber) handleChooseDesign(this.dataset.designNumber); });
+           if (modalChooseDesignButton) modalChooseDesignButton.addEventListener('click', function() {
+               if (this.dataset.designNumber) handleChooseDesign(this.dataset.designNumber, this.dataset.trimName);
+           });
 
 
 
