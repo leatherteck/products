@@ -155,6 +155,24 @@ print(f"Loaded {len(CATALOG)} makes from Excel")
 # --------------------------------------------------------------------
 # 2. Parsing with Excel authority
 # --------------------------------------------------------------------
+def extract_design_number(name, description="", slug=""):
+    """Extract design number from product name, description, or slug."""
+    # Pattern: K/F followed by digits, dash, digits (e.g., K1384-100, F1248-100)
+
+    # First try slug (most reliable source)
+    if slug:
+        slug_match = re.search(r"\b([KFL]\d{1,4}-\d{3})\b", slug, re.IGNORECASE)
+        if slug_match:
+            return slug_match.group(1).upper()
+
+    # Then try name and description
+    combined_text = f"{name} {description}"
+    design_match = re.search(r"\b([KFL]\d{1,4}-\d{3})\b", combined_text, re.IGNORECASE)
+    if design_match:
+        return design_match.group(1).upper()
+
+    return ""
+
 def parse_product_name(name):
     normalized_name = clean_text(name)
     lowered = normalized_name.lower()
@@ -237,6 +255,8 @@ while True:
         product_id = item.get("_id")
 
         name = item.get("name", "").strip()
+        description = item.get("description", "").strip()
+        slug = item.get("slug", "").strip()
         amount = item.get("amount")
         currency = item.get("currency", "USD")
         price = ""
@@ -252,6 +272,7 @@ while True:
         link = build_product_url(item)
 
         year, make, model, trim, design_name = parse_product_name(name)
+        design_number = extract_design_number(name, description, slug)
 
         record = {
             "year": year,
@@ -265,6 +286,8 @@ while True:
         }
         if design_name and design_name != trim:
             record["design"] = design_name
+        if design_number:
+            record["designNumber"] = design_number
         products.append(record)
 
         if not make:
@@ -288,21 +311,69 @@ with open(PRODUCTS_JSON, "w", encoding="utf-8") as f:
 with open(UNMATCHED_JSON, "w", encoding="utf-8") as f:
     json.dump(unmatched, f, indent=2, ensure_ascii=False)
 
-# Dropdown structures
+def expand_year_range(year_string):
+    """
+    Expand a year range string into individual years.
+    Examples:
+        "2021-2025" -> [2021, 2022, 2023, 2024, 2025]
+        "2023" -> [2023]
+        "2018 - 2022" -> [2018, 2019, 2020, 2021, 2022]
+    """
+    if not year_string:
+        return []
+
+    # Clean the string
+    cleaned = year_string.strip().replace(" ", "")
+
+    # Check if it's a range
+    if "-" in cleaned:
+        parts = cleaned.split("-")
+        if len(parts) == 2:
+            try:
+                start_year = int(parts[0])
+                end_year = int(parts[1])
+                # Return all years in the range (inclusive)
+                return list(range(start_year, end_year + 1))
+            except ValueError:
+                # If parsing fails, return empty list
+                return []
+
+    # Single year
+    try:
+        return [int(cleaned)]
+    except ValueError:
+        return []
+
+# Dropdown structures - expand year ranges to individual years
 MakeByYear, MakeModel, MakeTrim = {}, {}, {}
 for p in products:
-    y, mk, md, tr = p["year"], p["make"], p["model"], p["trim"]
-    if not y or not mk or not md:
+    year_range = p["year"]
+    mk, md, tr = p["make"], p["model"], p["trim"]
+
+    if not year_range or not mk or not md:
         continue
-    MakeByYear.setdefault(y, [])
-    if mk not in MakeByYear[y]:
-        MakeByYear[y].append(mk)
-    MakeModel.setdefault(y, {}).setdefault(mk, [])
-    if md not in MakeModel[y][mk]:
-        MakeModel[y][mk].append(md)
-    MakeTrim.setdefault(y, {}).setdefault(mk, {}).setdefault(md, [])
-    if tr and tr not in MakeTrim[y][mk][md]:
-        MakeTrim[y][mk][md].append(tr)
+
+    # Expand year range to individual years
+    individual_years = expand_year_range(year_range)
+
+    # Add this product's data to each individual year
+    for year in individual_years:
+        year_str = str(year)
+
+        # MakeByYear
+        MakeByYear.setdefault(year_str, [])
+        if mk not in MakeByYear[year_str]:
+            MakeByYear[year_str].append(mk)
+
+        # MakeModel
+        MakeModel.setdefault(year_str, {}).setdefault(mk, [])
+        if md not in MakeModel[year_str][mk]:
+            MakeModel[year_str][mk].append(md)
+
+        # MakeTrim
+        MakeTrim.setdefault(year_str, {}).setdefault(mk, {}).setdefault(md, [])
+        if tr and tr not in MakeTrim[year_str][mk][md]:
+            MakeTrim[year_str][mk][md].append(tr)
 
 with open(DROPDOWN_DATA, "w", encoding="utf-8") as f:
     f.write("const MakeByYear = " + json.dumps(MakeByYear, indent=2) + ";\n\n")
