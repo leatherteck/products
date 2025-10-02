@@ -345,11 +345,11 @@ button.action-btn.request-installation:hover {
 }
 
 button.action-btn.get-consultation {
-    background: linear-gradient(135deg, #6c757d, #5a6268) !important;
+    background: linear-gradient(135deg, #7a8288, #656c73) !important;
     border: none !important;
     color: white !important;
     font-weight: 600 !important;
-    box-shadow: 0 2px 8px rgba(108, 117, 125, 0.2) !important;
+    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.2) !important;
     border-radius: 10px !important;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
     position: relative !important;
@@ -357,9 +357,9 @@ button.action-btn.get-consultation {
 }
 
 button.action-btn.get-consultation:hover {
-    background: linear-gradient(135deg, #7a8288, #656c73) !important;
+    background: linear-gradient(135deg, #32b54a, #218838) !important;
     transform: translateY(-2px) scale(1.01) !important;
-    box-shadow: 0 6px 20px rgba(108, 117, 125, 0.4) !important;
+    box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4) !important;
     opacity: 1 !important;
 }
 
@@ -393,8 +393,8 @@ button.action-btn.get-consultation:hover {
     }
 
     button#goBackButton {
-        padding: 14px 20px !important;
-        font-size: 1em !important;
+        padding: 10px 16px !important;
+        font-size: 0.85em !important;
     }
 }
 
@@ -409,8 +409,8 @@ button.action-btn.get-consultation:hover {
 }
 
 #postSelectionButtonsContainer button {
-    width: 100%;
-    max-width: 320px;
+    width: auto;
+    max-width: 200px;
     margin: 0 auto;
     display: block;
 }
@@ -418,11 +418,11 @@ button.action-btn.get-consultation:hover {
 button#goBackButton {
     background: linear-gradient(135deg, #6c757d, #5a6268) !important;
     color: white !important;
-    padding: 16px 25px !important;
+    padding: 10px 20px !important;
     border: none !important;
-    border-radius: 10px !important;
-    font-weight: 600 !important;
-    font-size: 1.1em !important;
+    border-radius: 8px !important;
+    font-weight: 500 !important;
+    font-size: 0.9em !important;
     text-transform: uppercase !important;
     letter-spacing: 0.5px !important;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
@@ -513,81 +513,6 @@ button#contactUsButton:hover:not(:disabled) {
 
         #selectedCarDetails input[type="text"] { background-color: #444; color: #ddd; border: 1px solid #555; cursor: not-allowed; margin-bottom: 10px; width: 95%; padding: 8px; border-radius: 4px; box-sizing: border-box; }
 
-        /* Selected Product Image Styles */
-        #selectedProductImageContainer {
-            margin-top: 15px;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        #selectedProductImageContainer.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        #selectedProductImageContainer label {
-            color: #bbb;
-            font-size: 0.85em;
-            margin-bottom: 8px;
-            display: block;
-        }
-
-        #selectedProductImageWrapper {
-            position: relative;
-            width: 150px;
-            height: 150px;
-            border-radius: 8px;
-            overflow: hidden;
-            background-color: #1a1a1a;
-            border: 2px solid #404040;
-            transition: all 0.3s ease;
-        }
-
-        #selectedProductImageWrapper:hover {
-            border-color: #dc3545;
-            box-shadow: 0 4px 15px rgba(220, 53, 69, 0.2);
-        }
-
-        #selectedProductImage {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        #selectedProductImageOverlay {
-            position: absolute;
-            top: 8px;
-            right: 8px;
-            background: linear-gradient(135deg, #28a745, #1e7e34);
-            color: white;
-            padding: 4px 8px;
-            border-radius: 12px;
-            font-size: 0.7em;
-            font-weight: 600;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-            animation: pulseCheck 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes pulseCheck {
-            0% { box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3); }
-            100% { box-shadow: 0 2px 12px rgba(40, 167, 69, 0.6); }
-        }
-
-        #selectedProductImageOverlay span::before {
-            content: '✓ ';
-            margin-right: 2px;
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            #selectedProductImageWrapper {
-                width: 120px;
-                height: 120px;
-            }
-        }
-
         #contactForm label { display: block; margin-bottom: 5px; font-weight: bold; color: #eee; }
 
         #contactForm input[type="text"], #contactForm input[type="tel"], #contactForm input[type="email"], #contactForm textarea {
@@ -614,56 +539,17 @@ button#contactUsButton:hover:not(:disabled) {
             background-color: #252525;
         }
 
-        .terms-container {
-            margin: 20px 0;
-            padding: 15px;
-            background-color: rgba(255, 255, 255, 0.02);
-            border-radius: 8px;
-            border: 1px solid #404040;
-        }
+        .terms-container { margin-bottom: 15px; }
 
-        .terms-container input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-            margin-right: 12px;
-            margin-top: 0;
-            accent-color: #dc3545;
-            cursor: pointer;
-            flex-shrink: 0;
-        }
+        .terms-container input[type="checkbox"] { vertical-align: middle; margin-right: 5px; }
 
-        .terms-container label {
-            display: flex;
-            align-items: flex-start;
-            font-size: 0.9em;
-            line-height: 1.4;
-            color: #ddd;
-            cursor: pointer;
-            gap: 0;
-        }
+        .terms-container label { display: inline; font-size: 0.9em; }
 
-        .terms-container a {
-            color: #dc3545;
-            text-decoration: underline;
-            transition: color 0.2s ease;
-        }
+        .terms-container a { color: #ff8080; text-decoration: underline; }
 
-        .terms-container a:hover {
-            color: #ff4444;
-            text-decoration: none;
-        }
+        .terms-container a:hover { color: #ff4444; }
 
-        #termsError {
-            color: #ff6b6b;
-            font-size: 0.85em;
-            margin-top: 8px;
-            display: none;
-            width: 100%;
-            padding: 8px 12px;
-            background-color: rgba(255, 107, 107, 0.1);
-            border-radius: 4px;
-            border-left: 3px solid #ff6b6b;
-        }
+        #termsError { color: orange; font-size: 0.8em; margin-top: 5px; display: none; width: 100%; }
 
         .form-buttons { text-align: center; margin-top: 20px; }
 
@@ -799,6 +685,8 @@ button#contactUsButton:hover:not(:disabled) {
             box-sizing: border-box; opacity: 0; transform: translateY(10px);
 
             transition: opacity 0.3s ease-out 0.1s, transform 0.3s ease-out 0.1s, background-color 0.2s ease;
+
+            text-transform: none;
 
         }
 
@@ -981,7 +869,7 @@ button#contactUsButton:hover:not(:disabled) {
 
 
 
-    <!-- Progress Bar -->
+      <!-- Progress Bar -->
 
     <div id="progressBarContainer" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
 
@@ -1201,9 +1089,7 @@ button#contactUsButton:hover:not(:disabled) {
 
        <button type="button" id="goBackButton"> <i class="fas fa-arrow-left"></i> Go Back</button>
 
-       <button type="button" id="contactUsButton"> <i class="fas fa-envelope"></i> Get Quote Now!</button>
-
-  </div>
+    </div>
 
 
 
@@ -48153,15 +48039,7 @@ const ProductLinks = {
                console.log('Products data loaded from GitHub:', window.productsData.length, 'items');
            } catch (error) {
                console.error('Failed to load products.json from GitHub:', error);
-               // Fallback to local file
-               try {
-                   const localResponse = await fetch('./products.json');
-                   window.productsData = await localResponse.json();
-                   console.log('Fallback: Products data loaded from local file:', window.productsData.length, 'items');
-               } catch (localError) {
-                   console.error('Failed to load local products.json:', localError);
-                   window.productsData = [];
-               }
+               window.productsData = [];
            }
        }
 
@@ -48575,9 +48453,9 @@ const ProductLinks = {
                   progress = 100;
                   text = window.selectedProductUrl ? "Selection Complete" : "Choose Design";
               } else {
-                  if (yearValid) { progress = 25; text = "25% Complete"; }
-                  if (makeValid) { progress = 50; text = "50% Complete"; }
-                  if (modelValid) { progress = 75; text = "75% Complete"; }
+                  if (yearValid) { progress = 33; text = "33% Complete"; }
+                  if (makeValid) { progress = 66; text = "66% Complete"; }
+                  if (modelValid) { progress = 100; text = "100% Complete"; }
               }
 
               if (window.selectedProductUrl) {
@@ -48694,7 +48572,6 @@ const ProductLinks = {
               setVisibility(targetSection, false); // Hide image grid
               setVisibility(postSelectionButtonsContainer, true);
               setVisibility(goBackButton, true);
-              setVisibility(contactUsButton, false); // Hide the image grid "Get Quote Now" button
               setVisibility(contactFormContainer, true);
               setVisibility(productActionButtons, true);
               setVisibility(contactDetailsSection, false);
@@ -48851,7 +48728,7 @@ const ProductLinks = {
 
                setVisibility(goBackButton, true);
 
-               setVisibility(contactUsButton, true); // This is the contact button for the image grid section
+               // contactUsButton removed - no longer needed
 
                setVisibility(targetSection, true);
 
@@ -48998,7 +48875,7 @@ const ProductLinks = {
 
 
 
-           contactUsButton.addEventListener('click', function() { showContactFormDirectly(); });
+           // contactUsButton removed - no longer needed
 
            goBackButton.addEventListener('click', handleGoBack);
 
@@ -49113,7 +48990,7 @@ const ProductLinks = {
 
 
            // Global variable to store products data
-           let productsData = null;
+           var productsData = null;
 
            // Function to fetch products.json data from GitHub (Production)
            async function fetchProductsData() {
@@ -49168,7 +49045,7 @@ const ProductLinks = {
 
                try {
                    // Fetch products data if not already loaded
-                   await fetchProductsData();
+                   productsData = await fetchProductsData();
 
                    // Get current selections
                    const year = yearSelect.value;
@@ -49197,11 +49074,13 @@ const ProductLinks = {
                                designNumber = designNumber?.replace(/[^0-9]/g, '') || 'N/A';
                            }
 
-                           const key = `${designNumber}|${product.image || ''}`;
+                           // Use trim name as unique key to avoid duplicates
+                           const key = `${trimName}|${product.image || ''}`;
 
                            if (!designMap.has(key)) {
                                designMap.set(key, {
                                    designNumber: designNumber,
+                                   trimName: trimName,
                                    image: product.image,
                                    url: product.url,
                                    name: product.name || trimName
@@ -49211,13 +49090,21 @@ const ProductLinks = {
 
                        const uniqueItems = Array.from(designMap.values());
 
+                       // Sort designs numerically (1, 2, 3... instead of 1, 10, 11, 2, 20...)
+                       uniqueItems.sort((a, b) => {
+                           const numA = parseInt(a.designNumber) || 999;
+                           const numB = parseInt(b.designNumber) || 999;
+                           return numA - numB;
+                       });
+
                        uniqueItems.forEach(item => {
                            const itemDiv = document.createElement('div'); itemDiv.classList.add('grid-item');
 
                            const img = document.createElement('img');
                            img.src = item.image || '';
-                           img.alt = `${brand} - Design ${item.designNumber || 'N/A'}`;
+                           img.alt = `${brand} - ${item.trimName || 'Design'}`;
                            img.dataset.designNumber = item.designNumber || 'No Design #';
+                           img.dataset.trimName = item.trimName || '';
 
                            img.onerror = () => {
                                console.warn(`Failed to load image: ${item.image}`);
@@ -49226,8 +49113,15 @@ const ProductLinks = {
 
                            const chooseButton = document.createElement('button');
                            chooseButton.classList.add('choose-design-grid-btn');
-                           chooseButton.textContent = `Choose Design #${item.designNumber || 'N/A'}`;
+
+                           // Create a shortened version of trim name for button
+                           const shortTrimName = item.trimName?.length > 30 ?
+                               item.trimName.substring(0, 30) + '...' :
+                               item.trimName || 'Design';
+
+                           chooseButton.textContent = `Choose ${shortTrimName}`;
                            chooseButton.dataset.designNumber = item.designNumber || 'No Design #';
+                           chooseButton.dataset.trimName = item.trimName || '';
 
                            itemDiv.appendChild(img);
                            itemDiv.appendChild(chooseButton);
@@ -49262,15 +49156,21 @@ const ProductLinks = {
 
 
 
-           function openModal(imageUrl, designNumberText) {
+           function openModal(imageUrl, designNumberText, trimNameText) {
 
                if (!modalOverlay || !modalImage || !modalChooseDesignButton) return;
 
                modalImage.src = imageUrl;
 
                modalChooseDesignButton.dataset.designNumber = designNumberText;
+               modalChooseDesignButton.dataset.trimName = trimNameText || '';
 
-               modalChooseDesignButton.textContent = `Choose Design #${designNumberText}`;
+               // Use trim name if available, otherwise fall back to design number
+               const displayText = trimNameText && trimNameText !== 'No Design #' ?
+                   `Choose ${trimNameText}` :
+                   `Choose Design #${designNumberText}`;
+
+               modalChooseDesignButton.textContent = displayText;
 
                modalOverlay.classList.add('modal-active'); document.body.style.overflow = 'hidden';
 
@@ -49300,7 +49200,9 @@ const ProductLinks = {
 
                    if (buttonElement) { handleChooseDesign(buttonElement.dataset.designNumber); }
 
-                   else if (imgElement && imgElement.closest('.grid-item')) { openModal(imgElement.src, imgElement.dataset.designNumber); }
+                   else if (imgElement && imgElement.closest('.grid-item')) {
+                       openModal(imgElement.src, imgElement.dataset.designNumber, imgElement.dataset.trimName);
+                   }
 
                });
 
