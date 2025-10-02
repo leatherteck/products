@@ -49017,12 +49017,23 @@ const ProductLinks = {
                if (!productsData) return [];
 
                return productsData.filter(product => {
-                   // Match year (handle ranges like "2024-2025")
+                   // Match year (handle ranges like "2024-2025" or "2018 - 2022")
                    if (product.year && year) {
-                       if (product.year.includes('-')) {
-                           const [startYear] = product.year.split('-');
-                           if (parseInt(year) < parseInt(startYear)) return false;
+                       const yearStr = product.year.trim().replace(/\s+/g, ''); // Clean spaces
+                       if (yearStr.includes('-')) {
+                           // Handle year range
+                           const parts = yearStr.split('-');
+                           if (parts.length === 2) {
+                               const startYear = parseInt(parts[0]);
+                               const endYear = parseInt(parts[1]);
+                               const selectedYear = parseInt(year);
+                               // Check if selected year falls within the range (inclusive)
+                               if (selectedYear < startYear || selectedYear > endYear) {
+                                   return false;
+                               }
+                           }
                        } else if (product.year !== year) {
+                           // Exact year match
                            return false;
                        }
                    }
