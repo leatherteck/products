@@ -49125,13 +49125,10 @@ const ProductLinks = {
                            const chooseButton = document.createElement('button');
                            chooseButton.classList.add('choose-design-grid-btn');
 
-                           // Create a shortened version of trim name for button
-                           const shortTrimName = item.trimName?.length > 30 ?
-                               item.trimName.substring(0, 30) + '...' :
-                               item.trimName || 'Design';
-
-                           chooseButton.textContent = `Choose ${shortTrimName}`;
-                           chooseButton.dataset.designNumber = item.designNumber || 'No Design #';
+                           // Create button text with design number
+                           const designNumber = item.designNumber || 'No Design #';
+                           chooseButton.textContent = `Choose Design #${designNumber}`;
+                           chooseButton.dataset.designNumber = designNumber;
                            chooseButton.dataset.trimName = item.trimName || '';
 
                            itemDiv.appendChild(img);
