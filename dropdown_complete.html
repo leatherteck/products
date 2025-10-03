@@ -1335,6 +1335,7 @@ button#contactUsButton:hover:not(:disabled) {
 
              setVisibility(trimsSelect, true);
 
+             // Only add actual trim values from products.json
              availableTrims.forEach(trim => {
 
                const option = document.createElement('option');
@@ -1342,13 +1343,6 @@ button#contactUsButton:hover:not(:disabled) {
                option.value = trim; option.text = trim; trimsSelect.appendChild(option);
 
              });
-
-             // Always add "DON'T SEE MY OPTION" at the end
-             const option = document.createElement("option");
-
-             option.value = "DON'T SEE MY OPTION"; option.text = "DON'T SEE MY OPTION";
-
-             trimsSelect.appendChild(option);
 
            } else {
 
