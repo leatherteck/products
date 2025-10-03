@@ -216,14 +216,15 @@ def parse_product_name(name):
     if design_match:
         design_name = clean_text(design_match.group(0))
 
-    # Trim: remove known tokens and connector words, keep the design label if found
+    # Trim: remove known tokens and connector words to extract actual trim
     trim = normalized_name
     for token in filter(None, [design_name, year, make, model]):
         trim = re.sub(rf"\b{re.escape(token)}\b", "", trim, flags=re.IGNORECASE)
     trim = re.sub(r"\bfors?\b", "", trim, flags=re.IGNORECASE)
     trim = re.sub(r"\s+", " ", trim).strip()
 
-    trim_value = design_name if design_name else trim
+    # Use the extracted trim (not design_name)
+    trim_value = trim if trim else ""
 
     return year, make, model, trim_value, design_name
 
@@ -251,7 +252,8 @@ while True:
     if not items:
         break
 
-    for item in items:
+    # Process items and fetch trim from variants API
+    for idx, item in enumerate(items):
         product_id = item.get("_id")
 
         name = item.get("name", "").strip()
@@ -273,6 +275,38 @@ while True:
 
         year, make, model, trim, design_name = parse_product_name(name)
         design_number = extract_design_number(name, description, slug)
+
+        # Fetch trim from variants API for accuracy
+        if product_id:
+            try:
+                response = requests.get(
+                    f"{PRODUCTS_API_URL}/{product_id}",
+                    params=DETAIL_REQUEST_PARAMS,
+                    headers=REQUEST_HEADERS,
+                    timeout=30
+                )
+                response.raise_for_status()
+                detail = response.json()
+                variants = detail.get("variants", [])
+
+                # Extract Make, Model, Trim from variants
+                for variant in variants:
+                    variant_name = variant.get("name", "").strip()
+                    options = variant.get("options", [])
+
+                    if variant_name.lower() == "trim" and options:
+                        variant_trim = options[0].get("name", "").strip()
+                        if variant_trim:
+                            trim = variant_trim
+                            break
+
+                # Progress indicator
+                if (idx + 1) % 50 == 0:
+                    print(f"    Processed {idx + 1}/{len(items)} products...")
+
+            except Exception as exc:
+                print(f"    Failed to fetch trim for {product_id} ({name}): {exc}")
+                # Continue with parsed trim from name
 
         record = {
             "year": year,

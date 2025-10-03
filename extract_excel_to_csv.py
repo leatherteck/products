@@ -3,8 +3,8 @@ import re
 from pathlib import Path
 
 # File paths
-EXCEL_PATH = "CAR Image API.xlsx"
-OUTPUT_CSV = "products_bulk_upload_final.csv"
+EXCEL_PATH = "EM Upholstery Technology.xlsx"
+OUTPUT_CSV = "products_bulk_upload_with_trim.csv"
 
 def clean_text(value):
     """Clean and normalize text values."""
@@ -16,7 +16,7 @@ def clean_text(value):
 
 def create_product_title(row):
     """Generate product title from Excel data."""
-    # Format: [Design Number] - [Title Design] for [Car Brand] [Car Unit] [Trim] [Year]
+    # Format: [Title Design] for [Car Brand] [Car Unit] [Trim] [Year]
     parts = []
 
     title_design = clean_text(row.get('Title Design', ''))
@@ -24,18 +24,12 @@ def create_product_title(row):
     car_unit = clean_text(row.get('Car Unit', ''))
     trim = clean_text(row.get('Trim', ''))
     year = clean_text(row.get('Year', ''))
-    design_number = clean_text(row.get('Design Number', ''))
 
-    # Start with design number if available
-    if design_number:
-        parts.append(design_number)
-        parts.append('-')
-
-    # Build title
+    # Build title (WITHOUT design number)
     if title_design:
         parts.append(title_design)
 
-    if parts and parts[-1] != '-':
+    if parts:
         parts.append('for')
 
     if car_brand:
@@ -108,25 +102,30 @@ def create_handle(row, index):
 
     return f"product-{index + 1}"
 
-def format_description_html(description):
-    """Convert description text to simple HTML."""
+def format_description_html(description, design_number=""):
+    """Convert description text to simple HTML with design number at the beginning."""
+    html_parts = []
+
+    # Add design number at the beginning if provided
+    if design_number:
+        html_parts.append(f'<p><strong>Design Number: {design_number}</strong></p>')
+
     if not description:
-        return ""
+        return ''.join(html_parts) if html_parts else ""
 
     # Split by newlines and create HTML list or paragraphs
     lines = [line.strip() for line in description.split('\n') if line.strip()]
 
     if len(lines) > 1:
         # Create bullet list for multi-line descriptions
-        html_lines = ['<ul>']
+        html_parts.append('<ul>')
         for line in lines:
-            html_lines.append(f'<li>{line}</li>')
-        html_lines.append('</ul>')
-        return ''.join(html_lines)
+            html_parts.append(f'<li>{line}</li>')
+        html_parts.append('</ul>')
     elif len(lines) == 1:
-        return f'<p>{lines[0]}</p>'
+        html_parts.append(f'<p>{lines[0]}</p>')
 
-    return ""
+    return ''.join(html_parts)
 
 def extract_excel_to_csv():
     """Main extraction function."""
@@ -145,12 +144,16 @@ def extract_excel_to_csv():
         # Extract all fields
         title_design = clean_text(row.get('Title Design', ''))
         car_brand = clean_text(row.get('Car Brand', ''))
-        car_unit = clean_text(row.get('Car Unit', ''))
-        trim = clean_text(row.get('Trim', ''))
+        car_unit_raw = clean_text(row.get('Car Unit', ''))
+        trim_raw = clean_text(row.get('Trim', ''))
         year = clean_text(row.get('Year', ''))
         design_description = clean_text(row.get('Design Description', ''))
         design_number = clean_text(row.get('Design Number', ''))
         image_link = clean_text(row.get('Image Link', ''))
+
+        # Set default values if empty
+        car_unit = car_unit_raw if car_unit_raw else "DON'T KNOW/DON'T SEE MY OPTIONS"
+        trim = trim_raw if trim_raw else "DON'T KNOW/DON'T SEE MY OPTIONS"
 
         # Skip rows with missing essential data (blank rows)
         if not title_design or not car_brand or not year:
@@ -159,7 +162,7 @@ def extract_excel_to_csv():
         # Generate fields
         handle = create_handle(row, index)
         title = create_product_title(row)
-        body_html = format_description_html(design_description)
+        body_html = format_description_html(design_description, design_number)
 
         # Skip if title is empty (filtered out)
         if not title:
@@ -172,12 +175,12 @@ def extract_excel_to_csv():
             'Body (HTML)': body_html,
             'Included in Online Store': 'TRUE',
             'Image Src': image_link,
-            'Option1 Name': 'Year',
-            'Option1 Value': year,
-            'Option2 Name': 'Car Brand',
-            'Option2 Value': car_brand,
-            'Option3 Name': 'Model',
-            'Option3 Value': car_unit,
+            'Option1 Name': 'Make',
+            'Option1 Value': car_brand,
+            'Option2 Name': 'Model',
+            'Option2 Value': car_unit,
+            'Option3 Name': 'Trim',
+            'Option3 Value': trim,
             'Variant Price': '1895.00',  # Default price, can be adjusted
             'Variant Compare At Price': '',
             'Track Inventory': 'FALSE',

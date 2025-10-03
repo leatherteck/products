@@ -127,10 +127,6 @@ label {
     letter-spacing: 0.5px;
 }
 
-#trims {
-    display: none !important;
-}
-
 select {
     width: 100%;
     padding: 10px;
@@ -1071,11 +1067,9 @@ button#contactUsButton:hover:not(:disabled) {
 
       <div><select id="models" class="hidden"> <option value="">--Select Model--</option> </select></div>
 
-          </div>
+      <div><select id="trims" class="hidden"><option value="default">--Select Trim--</option></select></div>
 
-  <div style="display:none;">
-      <select id="trims" class="hidden"><option value="default">--Select Trim--</option></select>
-  </div>
+          </div>
 
   <div id="primaryActionButtonsContainer">
 
@@ -1805,10 +1799,12 @@ button#contactUsButton:hover:not(:disabled) {
               const yearValue = yearSelect.value;
               const makerValue = makersSelect.value;
               const modelValue = modelsSelect.value;
+              const trimValue = trimsSelect.value;
 
               const yearValid = yearValue && yearValue !== "" && yearValue !== "DON'T SEE MY OPTION";
               const makeValid = !makersSelect.classList.contains('hidden') && makerValue && makerValue !== "" && makerValue !== "DON'T SEE MY OPTION";
               const modelValid = !modelsSelect.classList.contains('hidden') && modelValue && modelValue !== "" && modelValue !== "DON'T SEE MY OPTION";
+              const trimValid = !trimsSelect.classList.contains('hidden') && trimValue && trimValue !== "" && trimValue !== "default" && trimValue !== "DON'T SEE MY OPTION";
 
               const formIsVisible = contactFormContainer.classList.contains('visible');
               const postSelectionAreaVisible = !postSelectionButtonsContainer.classList.contains('hidden') || !targetSection.classList.contains('hidden');
@@ -1817,9 +1813,10 @@ button#contactUsButton:hover:not(:disabled) {
                   progress = 100;
                   text = window.selectedProductUrl ? "Selection Complete" : "Choose Design";
               } else {
-                  if (yearValid) { progress = 33; text = "33% Complete"; }
-                  if (makeValid) { progress = 66; text = "66% Complete"; }
-                  if (modelValid) { progress = 100; text = "100% Complete"; }
+                  if (yearValid) { progress = 25; text = "25% Complete"; }
+                  if (makeValid) { progress = 50; text = "50% Complete"; }
+                  if (modelValid) { progress = 75; text = "75% Complete"; }
+                  if (trimValid) { progress = 100; text = "100% Complete"; }
               }
 
               if (window.selectedProductUrl) {
@@ -1841,6 +1838,8 @@ button#contactUsButton:hover:not(:disabled) {
               const makerValue = makersSelect.value;
 
               const modelValue = modelsSelect.value;
+
+              const trimValue = trimsSelect.value;
 
               const formIsVisible = contactFormContainer.classList.contains('visible');
 
@@ -1864,7 +1863,9 @@ button#contactUsButton:hover:not(:disabled) {
 
               const modelValid = !modelsSelect.classList.contains('hidden') && modelValue && modelValue !== "" && modelValue !== "DON'T SEE MY OPTION";
 
-              const canProceedToNextStep = yearValid && makeValid && modelValid;
+              const trimValid = !trimsSelect.classList.contains('hidden') && trimValue && trimValue !== "" && trimValue !== "default" && trimValue !== "DON'T SEE MY OPTION";
+
+              const canProceedToNextStep = yearValid && makeValid && modelValid && trimValid;
 
               setVisibility(nextButton, canProceedToNextStep);
 
@@ -2065,9 +2066,19 @@ button#contactUsButton:hover:not(:disabled) {
 
                setVisibility(postSelectionButtonsContainer, false); setVisibility(targetSection, false);
 
-               if (modelsSelect.value && modelsSelect.value !== "" && modelsSelect.value !== "DON'T SEE MY OPTION") {
+               updatePrimaryActionButtonsVisibility(); updateProgress();
 
-                   fetchAndDisplayItems(modelsSelect.value);
+          });
+
+           trimsSelect.addEventListener('change', () => {
+
+              if (trimsSelect.value === "DON'T SEE MY OPTION") { showContactFormDirectly(); return; }
+
+               setVisibility(postSelectionButtonsContainer, false); setVisibility(targetSection, false);
+
+               if (trimsSelect.value && trimsSelect.value !== "" && trimsSelect.value !== "default" && trimsSelect.value !== "DON'T SEE MY OPTION") {
+
+                   fetchAndDisplayItems(modelsSelect.value, trimsSelect.value);
 
                } else { imageContainer.innerHTML = ''; errorMessage.textContent = ''; }
 
@@ -2100,7 +2111,7 @@ button#contactUsButton:hover:not(:disabled) {
                window.selectedProductUrl = getProductUrlFromJson(yearSelect.value, makersSelect.value, modelsSelect.value, trimsSelect.value) ||
                                          resolveProductLink(yearSelect.value, makersSelect.value, modelsSelect.value, trimsSelect.value);
 
-               fetchAndDisplayItems(modelsSelect.value);
+               fetchAndDisplayItems(modelsSelect.value, trimsSelect.value);
 
                updatePrimaryActionButtonsVisibility();
 
@@ -2410,7 +2421,7 @@ button#contactUsButton:hover:not(:disabled) {
                });
            }
 
-           async function fetchAndDisplayItems(brand) {
+           async function fetchAndDisplayItems(brand, selectedTrim = null) {
 
                if (!brand || brand === "" || brand === "DON'T SEE MY OPTION") {
                     imageContainer.innerHTML = ''; errorMessage.textContent = ''; loadingMessage.style.display = 'none'; return;
@@ -2426,9 +2437,17 @@ button#contactUsButton:hover:not(:disabled) {
                    const year = yearSelect.value;
                    const make = makersSelect.value;
                    const model = modelsSelect.value;
+                   const trim = selectedTrim || trimsSelect.value;
 
                    // Get designs for this vehicle
-                   const vehicleProducts = getDesignsForVehicle(year, make, model);
+                   let vehicleProducts = getDesignsForVehicle(year, make, model);
+
+                   // Filter by trim if specified
+                   if (trim && trim !== "" && trim !== "default" && trim !== "DON'T SEE MY OPTION") {
+                       vehicleProducts = vehicleProducts.filter(product => {
+                           return product.trim && product.trim.toLowerCase() === trim.toLowerCase();
+                       });
+                   }
 
                    if (vehicleProducts.length === 0) {
                        errorMessage.innerHTML = `No design examples currently available for "${brand}". You can still request a quote by clicking the "Get Quote Now!" button.`;
