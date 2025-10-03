@@ -1067,7 +1067,7 @@ button#contactUsButton:hover:not(:disabled) {
 
       <div><select id="models" class="hidden"> <option value="">--Select Model--</option> </select></div>
 
-      <div><select id="trims" class="hidden"><option value="default">--Select Trim--</option></select></div>
+      <div id="trimContainer"><select id="trims" class="hidden"><option value="default">--Select Trim--</option></select></div>
 
           </div>
 
@@ -1317,6 +1317,7 @@ button#contactUsButton:hover:not(:disabled) {
            const modelsSelected = document.getElementById("models").value;
 
            const trimsSelect = document.getElementById("trims");
+           const trimContainer = document.getElementById("trimContainer");
 
            window.selectedProductUrl = "";
 
@@ -1331,9 +1332,13 @@ button#contactUsButton:hover:not(:disabled) {
            // Use products.json data first for trims
            const availableTrims = getAvailableTrimsFromProducts(selectedYear, makersSelected, modelsSelected);
 
+           console.log('Year:', selectedYear, 'Make:', makersSelected, 'Model:', modelsSelected);
+           console.log('Available trims:', availableTrims);
+
            if (selectedYear && makersSelected && modelsSelected && modelsSelected !== "" && modelsSelected !== "DON'T SEE MY OPTION") {
 
-             setVisibility(trimsSelect, true);
+             setVisibility(trimContainer, true);
+             trimsSelect.classList.remove('hidden');
 
              // Only add actual trim values from products.json
              availableTrims.forEach(trim => {
@@ -1344,9 +1349,13 @@ button#contactUsButton:hover:not(:disabled) {
 
              });
 
+             console.log('Trim dropdown should be visible now, options added:', availableTrims.length);
+
            } else {
 
-               setVisibility(trimsSelect, false);
+               setVisibility(trimContainer, false);
+               trimsSelect.classList.add('hidden');
+               console.log('Trim dropdown hidden - conditions not met');
 
            }
 
@@ -2532,12 +2541,8 @@ button#contactUsButton:hover:not(:disabled) {
                modalChooseDesignButton.dataset.designNumber = designNumberText;
                modalChooseDesignButton.dataset.trimName = trimNameText || '';
 
-               // Use trim name if available, otherwise fall back to design number
-               const displayText = trimNameText && trimNameText !== 'No Design #' ?
-                   `Choose ${trimNameText}` :
-                   `Choose Design #${designNumberText}`;
-
-               modalChooseDesignButton.textContent = displayText;
+               // Always show design number to match grid button
+               modalChooseDesignButton.textContent = `Choose Design #${designNumberText}`;
 
                modalOverlay.classList.add('modal-active'); document.body.style.overflow = 'hidden';
 
