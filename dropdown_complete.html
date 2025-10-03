@@ -1331,7 +1331,7 @@ button#contactUsButton:hover:not(:disabled) {
            // Use products.json data first for trims
            const availableTrims = getAvailableTrimsFromProducts(selectedYear, makersSelected, modelsSelected);
 
-           if (availableTrims && availableTrims.length > 0) {
+           if (selectedYear && makersSelected && modelsSelected && modelsSelected !== "" && modelsSelected !== "DON'T SEE MY OPTION") {
 
              setVisibility(trimsSelect, true);
 
@@ -1343,20 +1343,7 @@ button#contactUsButton:hover:not(:disabled) {
 
              });
 
-           } else if(selectedYear && makersSelected && modelsSelected) {
-
-             const trims = getAvailableTrimsFromProducts(selectedYear, makersSelected, modelsSelected);
-
-             setVisibility(trimsSelect, true);
-
-             trims.forEach(trim => {
-
-               const option = document.createElement('option');
-
-               option.value = trim; option.text = trim; trimsSelect.appendChild(option);
-
-             });
-
+             // Always add "DON'T SEE MY OPTION" at the end
              const option = document.createElement("option");
 
              option.value = "DON'T SEE MY OPTION"; option.text = "DON'T SEE MY OPTION";
@@ -1366,8 +1353,6 @@ button#contactUsButton:hover:not(:disabled) {
            } else {
 
                setVisibility(trimsSelect, false);
-
-                if (!window.productsData && selectedYear && makersSelected && modelsSelected && modelsSelected !== "" && modelsSelected !== "DON'T SEE MY OPTION") console.error("Products data not loaded.");
 
            }
 
