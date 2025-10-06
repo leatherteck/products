@@ -297,7 +297,11 @@ while True:
                     if variant_name.lower() == "trim" and options:
                         variant_trim = options[0].get("name", "").strip()
                         if variant_trim:
-                            trim = variant_trim
+                            # Remove design number from trim (format: K####-### or F####-###)
+                            # Keep trim clean without design number for JSON
+                            trim = re.sub(r'\s+[KFL]\d{1,4}-\d{3}\s*$', '', variant_trim).strip()
+                            if not trim:  # If trim was only the design number, keep original
+                                trim = variant_trim
                             break
 
                 # Progress indicator
