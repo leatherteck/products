@@ -1630,7 +1630,7 @@ button#contactUsButton:hover:not(:disabled) {
               return '';
           }
           
-          function applyDesignSelection(designNumber) {
+          function applyDesignSelection(designNumber, productUrl = null) {
               const year = yearSelect.value;
               const make = makersSelect.value;
               const model = modelsSelect.value;
@@ -1638,7 +1638,9 @@ button#contactUsButton:hover:not(:disabled) {
 
               if (!year || !make || !model) {
                   window.selectedTrim = currentTrimValue || '';
-                  window.selectedProductUrl = resolveProductLink(year, make, model, currentTrimValue) || '';
+                  if (!productUrl) {
+                      window.selectedProductUrl = resolveProductLink(year, make, model, currentTrimValue) || '';
+                  }
                   return;
               }
 
@@ -1653,8 +1655,10 @@ button#contactUsButton:hover:not(:disabled) {
               window.selectedTrim = effectiveTrim || '';
               window.selectedDesignNumber = designNumber || '';
 
-              // Get URL from products.json based on selection
-              window.selectedProductUrl = getProductUrlFromJson(year, make, model, effectiveTrim, designNumber) || '';
+              // Only lookup URL if not provided directly
+              if (!productUrl) {
+                  window.selectedProductUrl = getProductUrlFromJson(year, make, model, effectiveTrim, designNumber) || '';
+              }
 
               // Update form display fields
               updateFormDisplayFields(year, make, model, effectiveTrim);
@@ -1915,11 +1919,14 @@ button#contactUsButton:hover:not(:disabled) {
 
               window.selectedTrim = finalTrim || "";
 
-              const resolvedProduct = (finalYear && finalMake && finalModel && finalTrim)
-                  ? resolveProductLink(finalYear, finalMake, finalModel, finalTrim)
-                  : "";
+              // Only resolve product URL if not already set from design selection
+              if (!window.selectedProductUrl) {
+                  const resolvedProduct = (finalYear && finalMake && finalModel && finalTrim)
+                      ? resolveProductLink(finalYear, finalMake, finalModel, finalTrim)
+                      : "";
 
-              window.selectedProductUrl = resolvedProduct || "";
+                  window.selectedProductUrl = resolvedProduct || "";
+              }
 
               setVisibility(selectionContainer, false);
               setVisibility(targetSection, false); // Hide image grid
@@ -2479,6 +2486,7 @@ button#contactUsButton:hover:not(:disabled) {
                            img.alt = `${brand} - ${item.trimName || 'Design'}`;
                            img.dataset.designNumber = item.designNumber || 'No Design #';
                            img.dataset.trimName = item.trimName || '';
+                           img.dataset.productUrl = item.url || '';
 
                            img.onerror = () => {
                                console.warn(`Failed to load image: ${item.image}`);
@@ -2493,6 +2501,7 @@ button#contactUsButton:hover:not(:disabled) {
                            chooseButton.textContent = `Choose Design #${designNumber}`;
                            chooseButton.dataset.designNumber = designNumber;
                            chooseButton.dataset.trimName = item.trimName || '';
+                           chooseButton.dataset.productUrl = item.url || '';
 
                            itemDiv.appendChild(img);
                            itemDiv.appendChild(chooseButton);
@@ -2511,9 +2520,14 @@ button#contactUsButton:hover:not(:disabled) {
 
 
 
-           function handleChooseDesign(designNumber, trimName = null) {
+           function handleChooseDesign(designNumber, trimName = null, productUrl = null) {
 
-              applyDesignSelection(designNumber);
+              // Store the product URL directly if provided (before applyDesignSelection)
+              if (productUrl) {
+                  window.selectedProductUrl = productUrl;
+              }
+
+              applyDesignSelection(designNumber, productUrl);
 
               // Store the trim name from the selected product
               if (trimName) {
@@ -2532,7 +2546,7 @@ button#contactUsButton:hover:not(:disabled) {
 
 
 
-           function openModal(imageUrl, designNumberText, trimNameText) {
+           function openModal(imageUrl, designNumberText, trimNameText, productUrl = null) {
 
                if (!modalOverlay || !modalImage || !modalChooseDesignButton) return;
 
@@ -2540,6 +2554,7 @@ button#contactUsButton:hover:not(:disabled) {
 
                modalChooseDesignButton.dataset.designNumber = designNumberText;
                modalChooseDesignButton.dataset.trimName = trimNameText || '';
+               modalChooseDesignButton.dataset.productUrl = productUrl || '';
 
                // Always show design number to match grid button
                modalChooseDesignButton.textContent = `Choose Design #${designNumberText}`;
@@ -2571,11 +2586,11 @@ button#contactUsButton:hover:not(:disabled) {
                    const buttonElement = event.target.closest('.choose-design-grid-btn');
 
                    if (buttonElement) {
-                       handleChooseDesign(buttonElement.dataset.designNumber, buttonElement.dataset.trimName);
+                       handleChooseDesign(buttonElement.dataset.designNumber, buttonElement.dataset.trimName, buttonElement.dataset.productUrl);
                    }
 
                    else if (imgElement && imgElement.closest('.grid-item')) {
-                       openModal(imgElement.src, imgElement.dataset.designNumber, imgElement.dataset.trimName);
+                       openModal(imgElement.src, imgElement.dataset.designNumber, imgElement.dataset.trimName, imgElement.dataset.productUrl);
                    }
 
                });
@@ -2590,10 +2605,11 @@ button#contactUsButton:hover:not(:disabled) {
 
                   const designNum = modalChooseDesignButton.dataset.designNumber;
                   const trimName = modalChooseDesignButton.dataset.trimName;
+                  const productUrl = modalChooseDesignButton.dataset.productUrl;
 
                   if (designNum && modalOverlay.classList.contains('modal-active')) {
 
-                      handleChooseDesign(designNum, trimName);
+                      handleChooseDesign(designNum, trimName, productUrl);
 
                   }
 
@@ -2610,7 +2626,7 @@ button#contactUsButton:hover:not(:disabled) {
            document.addEventListener('keydown', function(event) { if (event.key === 'Escape' && modalOverlay && modalOverlay.classList.contains('modal-active')) closeModal(); });
 
            if (modalChooseDesignButton) modalChooseDesignButton.addEventListener('click', function() {
-               if (this.dataset.designNumber) handleChooseDesign(this.dataset.designNumber, this.dataset.trimName);
+               if (this.dataset.designNumber) handleChooseDesign(this.dataset.designNumber, this.dataset.trimName, this.dataset.productUrl);
            });
 
 
