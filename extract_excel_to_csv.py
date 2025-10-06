@@ -169,6 +169,9 @@ def extract_excel_to_csv():
             continue
 
         # Create product row
+        # Add design number to trim for Option3 (variant 3) - for receipt display
+        trim_with_design = f"{trim} {design_number}".strip() if design_number else trim
+
         product_row = {
             'Handle': handle,
             'Title': title,
@@ -180,7 +183,7 @@ def extract_excel_to_csv():
             'Option2 Name': 'Model',
             'Option2 Value': car_unit,
             'Option3 Name': 'Trim',
-            'Option3 Value': trim,
+            'Option3 Value': trim_with_design,
             'Variant Price': '1895.00',  # Default price, can be adjusted
             'Variant Compare At Price': '',
             'Track Inventory': 'FALSE',
