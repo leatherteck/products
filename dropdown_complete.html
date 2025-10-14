@@ -1417,7 +1417,7 @@ button#contactUsButton:hover:not(:disabled) {
        // Load products.json data from GitHub
        async function loadProductsData() {
            try {
-               const response = await fetch('https://raw.githubusercontent.com/tekkenfreya/leatherteck-dropdown/main/products.json');
+               const response = await fetch('https://raw.githubusercontent.com/leatherteck/products/refs/heads/main/products.json');
                window.productsData = await response.json();
                console.log('Products data loaded from GitHub:', window.productsData.length, 'items');
            } catch (error) {
