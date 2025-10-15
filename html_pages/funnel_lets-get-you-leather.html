@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top-Rated Car Leather Upholstery Near Me | LeatherTeck</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Img Comparison Slider CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/img-comparison-slider@8/dist/style.css" />
+
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-red: #E10B0A;
+            --dark-bg: #1a1a1a; /* Base for dark sections */
+            --light-text: #ffffff; /* Changed to pure white */
+            --dark-text: #212529;
+            --card-dark-bg: #2a2a2a; /* Base for cards on dark bg */
+            --card-dark-bg-overlay: rgba(42, 42, 42, 0.95); /* For cards on bg images */
+            --border-dark: #444;
+            --navbar-initial-height: 76px;
+            --navbar-scrolled-height: 60px;
+
+            /* Overlays for background images */
+            --dark-overlay-hero: rgba(26, 26, 26, 0.8);
+            --dark-overlay-hero-end: rgba(26, 26, 26, 0.85);
+            --dark-overlay-product: rgba(26, 26, 26, 0.9);
+            --dark-overlay-product-end: rgba(26, 26, 26, 0.92);
+            --dark-overlay-process: rgba(26, 26, 26, 0.88);
+            --dark-overlay-process-end: rgba(26, 26, 26, 0.9);
+            --red-overlay-guarantee: rgba(225, 11, 10, 0.85);
+            --red-overlay-guarantee-end: rgba(225, 11, 10, 0.9);
+            /* New overlays for sections that previously had solid dark backgrounds */
+            --dark-overlay-testimonials: rgba(26, 26, 26, 0.9);
+            --dark-overlay-testimonials-end: rgba(26, 26, 26, 0.92);
+            --dark-overlay-pricing: rgba(26, 26, 26, 0.88);
+            --dark-overlay-pricing-end: rgba(26, 26, 26, 0.9);
+            --dark-overlay-final-cta: rgba(26, 26, 26, 0.85);
+            --dark-overlay-final-cta-end: rgba(26, 26, 26, 0.88);
+        }
+
+        html {
+            font-size: 112.5%; /* Sets base font to 18px if browser default is 16px */
+        }
+
+        body {
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            background-color: var(--dark-bg); /* Default body background, overridden by sections */
+            color: var(--light-text); /* Default body text color, overridden by sections */
+            padding-top: var(--navbar-initial-height);
+            font-size: 1rem; /* Body text will be 18px based on html font-size */
+            line-height: 1.75; /* Increased line height for better readability */
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--primary-red);
+            font-weight: bold;
+        }
+
+        /* Text shadow for red headlines on dark backgrounds */
+        .hero-section h1,
+        .product-details h2, .product-details .card-title, /* .card-title is h3 */
+        .process-section h2, .process-section .card-title, /* .card-title is h3 */
+        .testimonials-section h2,
+        .pricing-section h2,
+        .final-cta h2, .final-cta .card h4 {
+            text-shadow: 1px 1px 2px #000000;
+        }
+
+        .display-4 { font-size: 3.6rem; } /* Hero title: ~64.8px */
+        .display-3 { font-size: 3.8rem; } /* Trust icons: ~68.4px */
+        .display-1 { font-size: 5rem; }   /* Process numbers: ~90px */
+
+
+        /* --- NAVBAR STYLING --- */
+        #main-navbar {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 1030;
+            background-color: #000000;
+            height: var(--navbar-initial-height);
+            padding-top: 1rem; padding-bottom: 1rem;
+            transition: height 0.3s ease, padding-top 0.3s ease, padding-bottom 0.3s ease, background-color 0.3s ease;
+            box-sizing: border-box;
+        }
+        #main-navbar .navbar-brand img { max-height: 100px; transition: max-height 0.3s ease; width: auto; }
+        #main-navbar .navbar-nav .nav-link {
+            padding-top: 0.5rem; padding-bottom: 0.5rem;
+            transition: padding-top 0.3s ease, padding-bottom 0.3s ease;
+            font-size: 1rem; /* 18px */
+        }
+        #main-navbar .btn-sm {
+            font-size: 1rem; /* 18px, slightly larger */
+            padding: 0.4rem 0.9rem; /* Adjusted padding */
+        }
+        #main-navbar.navbar-scrolled {
+            height: var(--navbar-scrolled-height);
+            padding-top: 0.5rem; padding-bottom: 0.5rem;
+            background-color: rgba(0, 0, 0, 0.9);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+        #main-navbar.navbar-scrolled .navbar-brand img { max-height: 60px; }
+        #main-navbar.navbar-scrolled .navbar-nav .nav-link { padding-top: 0.25rem; padding-bottom: 0.25rem; }
+        /* --- END NAVBAR STYLING --- */
+
+        /* --- BACKGROUND IMAGE STYLES --- */
+        .hero-section {
+            color: var(--light-text);
+            background: linear-gradient(var(--dark-overlay-hero), var(--dark-overlay-hero-end)), url('https://storage.googleapis.com/msgsndr/dC0ujeVga1kZlZsLqjZz/media/67e1adb90fc7946d1cd75ff4.jpeg') center center / cover no-repeat;
+            position: relative;
+        }
+        .product-details {
+            color: var(--light-text);
+            background: linear-gradient(var(--dark-overlay-product), var(--dark-overlay-product-end)), url('https://storage.googleapis.com/msgsndr/dC0ujeVga1kZlZsLqjZz/media/67e198611870f43ea739690a.jpeg') center center / cover no-repeat;
+            position: relative;
+        }
+        .process-section {
+            color: var(--light-text);
+            background: linear-gradient(var(--dark-overlay-process), var(--dark-overlay-process-end)), url('https://storage.googleapis.com/msgsndr/dC0ujeVga1kZlZsLqjZz/media/681686f252fff62b50d3a8f9.png') center center / cover no-repeat;
+            position: relative;
+        }
+        .guarantee-section {
+            color: #fff; /* Specific light text for red BG */
+            background: linear-gradient(var(--red-overlay-guarantee), var(--red-overlay-guarantee-end)), url('https://storage.googleapis.com/msgsndr/dC0ujeVga1kZlZsLqjZz/media/68190315efd6391d175f600b.png') center center / cover no-repeat;
+            position: relative;
+        }
+        .testimonials-section {
+            color: var(--light-text);
+            background: linear-gradient(var(--dark-overlay-testimonials), var(--dark-overlay-testimonials-end)), url('https://storage.googleapis.com/msgsndr/dC0ujeVga1kZlZsLqjZz/media/6827bf531e09cf25a04a4035.jpeg') center center / cover no-repeat;
+            position: relative;
+        }
+        .pricing-section {
+            color: var(--light-text);
+            background: linear-gradient(var(--dark-overlay-pricing), var(--dark-overlay-pricing-end)), url('https://storage.googleapis.com/msgsndr/dC0ujeVga1kZlZsLqjZz/media/6818fbf5ffd64e2b79760e04.png') center center / cover no-repeat;
+            position: relative;
+        }
+        .final-cta {
+            color: var(--light-text);
+            background: linear-gradient(var(--dark-overlay-final-cta), var(--dark-overlay-final-cta-end)), url('https://storage.googleapis.com/msgsndr/dC0ujeVga1kZlZsLqjZz/media/67f84bd4b95d20c133a2906d.jpeg') center center / cover no-repeat;
+            position: relative;
+        }
+
+        /* Ensure cards in sections with BG images stand out */
+        .product-details .card, .process-section .card,
+        .testimonials-section .card, .final-cta .card {
+            background-color: var(--card-dark-bg-overlay);
+            border: 1px solid #555;
+        }
+        .guarantee-section .card {
+            background-color: rgba(255, 255, 255, 0.95);
+            color: var(--dark-text);
+        }
+        .guarantee-section .countdown { /* Parent div for timer */
+            background-color: rgba(248, 249, 250, 0.9);
+        }
+        /* --- END BACKGROUND IMAGE STYLES --- */
+
+        /* --- HERO SECTION STYLES --- */
+        .hero-section .lead { font-size: 1.45rem; /* Approx 26px */ }
+        .hero-section p { font-size: 1.1rem; /* Approx 19.8px */ }
+
+        .hero-image-slider {
+            max-width: 800px;
+            width: 100%;
+            aspect-ratio: 16/9;
+            margin-left: auto;
+            margin-right: auto;
+            border: 3px solid var(--primary-red);
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+        .hero-image-slider .custom-handle {
+            width: 45px;
+            height: 45px;
+        }
+        /* --- END HERO SECTION STYLES --- */
+
+
+        .btn-red { background-color: var(--primary-red); border-color: var(--primary-red); color: #fff; font-weight: bold; transition: background-color 0.3s ease, border-color 0.3s ease; }
+        .btn-red:hover { background-color: #bb0908; border-color: #bb0908; color: #fff; }
+        .btn-outline-red { color: var(--primary-red); border-color: var(--primary-red); font-weight: bold; }
+        .btn-outline-red:hover { background-color: var(--primary-red); border-color: var(--primary-red); color: #fff; }
+        .btn { font-size: 1.05rem; } /* ~18.9px */
+        .btn-lg { font-size: 1.3rem; } /* ~23.4px */
+
+
+        /* Section Backgrounds & Text Colors (for sections WITHOUT bg images) */
+        .objections-section, .transformation-story, .trust-section, .faq-section {
+            background-color: #f8f9fa; /* Light background */
+            color: var(--dark-text);   /* Dark text for readability */
+        }
+        .objections-section h2, .transformation-story h2, .trust-section h2, .faq-section h2,
+        .objections-section strong, .transformation-story strong, .trust-section strong, .faq-section strong {
+             color: var(--primary-red);
+        }
+        .objections-section p strong, .transformation-story p strong, .trust-section p strong, .faq-section p strong,
+        .objections-section li strong, .transformation-story li strong, .trust-section li strong, .faq-section li strong {
+             color: var(--dark-text);
+        }
+
+        .objections-section .d-flex > div { font-size: 1.1rem; }
+        .objections-section .d-flex > div > strong { font-size: 1.25rem; font-weight: 600; display: block; margin-bottom: 0.2rem; color: var(--dark-text); }
+        .objections-section .d-flex > div .small { font-size: 1rem; }
+        .objections-section .fas { font-size: 2.5rem !important; color: var(--primary-red); }
+
+
+        .testimonials-section .card-text { font-size: 1.05rem; }
+        .testimonials-section .card-text strong,
+        .product-details .card-title,
+        .process-section .card-title,
+        .final-cta .card h4 {
+            color: var(--primary-red);
+        }
+        .product-details ul li, .process-section p, .final-cta .card ul li {
+            font-size: 1.05rem;
+            color: var(--light-text);
+        }
+        .testimonials-section .text-warning { color: #ffc107 !important; }
+
+        .trust-section .card { background-color: #fff; color: var(--dark-text); }
+        .trust-section .card h4 { color: var(--primary-red); font-size: 1.6rem; }
+        .trust-section .card p { font-size: 1.05rem; }
+        .trust-section .card .display-3 .fas { color: var(--primary-red); }
+
+
+        .guarantee-section .card .card-title { color: var(--primary-red); }
+        .guarantee-section .card .card-text { font-size: 1.05rem; }
+        .guarantee-section > .container-fluid > p { font-size: 1.1rem; }
+        .guarantee-section .text-center.bg-white.text-dark p { font-size: 1.1rem; }
+
+
+        .transformation-story .before-after-img { min-height: 250px; max-width: 100%; height: auto; object-fit: cover; border-radius: 0.375rem; border: 3px solid #ccc; }
+        .transformation-story .carousel-item img { min-height: 250px; max-height: 450px; object-fit: cover; border-radius: 0.375rem; border: 3px solid #ccc; }
+        .transformation-story .carousel-control-prev-icon, .transformation-story .carousel-control-next-icon { background-color: rgba(0, 0, 0, 0.5); border-radius: 50%; padding: 10px; }
+        .transformation-story p, .transformation-story li { font-size: 1.1rem; }
+
+
+        .pricing-section table { font-size: 1rem; }
+        .pricing-section table thead.table-dark {
+            background-color: #000000 !important;
+            color: var(--light-text);
+            border-bottom: 2px solid var(--primary-red);
+        }
+        .pricing-section table tbody { background-color: #f8f9fa; color: var(--dark-text); }
+        .pricing-section table .text-success { color: #198754 !important; }
+        .pricing-section table .text-danger { color: var(--primary-red) !important; }
+
+        .pricing-section table tr.table-price-highlight td,
+        .pricing-section table tr.table-price-highlight strong {
+            background-color: var(--primary-red) !important;
+            color: var(--light-text) !important;
+            font-weight: bold;
+            font-size: 1.15rem;
+        }
+        .pricing-section table tr.table-savings-highlight td,
+        .pricing-section table tr.table-savings-highlight strong {
+            background-color: #e9ecef !important;
+            color: var(--primary-red) !important;
+            font-weight: bold;
+            font-size: 1.15rem;
+        }
+        .pricing-section > .container-fluid > p { font-size: 1.05rem; }
+
+
+        .guarantee-section h2, .guarantee-section h3 { color: #fff; }
+
+        .faq-section .accordion-button { background-color: #e9ecef; color: var(--dark-text); font-weight: bold; font-size: 1.3rem; }
+        .faq-section .accordion-button:not(.collapsed) { background-color: #d4d7da; color: var(--dark-text); box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .125); }
+        .faq-section .accordion-button:focus { box-shadow: 0 0 0 0.25rem rgba(225, 11, 10, 0.25); border-color: var(--primary-red); }
+        .faq-section .accordion-body { background-color: #fff; color: var(--dark-text); font-size: 1.1rem; }
+        .faq-section .accordion-item { border: 1px solid #ccc; border-radius: 0.375rem; }
+
+        .fa-check { font-size: 1.2em; margin-right: 0.4em !important; }
+        .product-details ul .fas, .final-cta ul .fas {
+            font-size: 1.1em;
+            margin-right: 0.5em !important;
+        }
+
+        .product-thumbnails img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            margin: 5px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            border-radius: 4px;
+            transition: border-color 0.3s ease;
+        }
+        .product-thumbnails img:hover { border-color: var(--primary-red); }
+
+        .modal-overlay { display: none; position: fixed; z-index: 1055; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0, 0, 0, 0.85); justify-content: center; align-items: center; }
+        .modal-active { display: flex; }
+        .modal-content { position: relative; background-color: #111; margin: auto; padding: 20px; border: 1px solid var(--border-dark); border-radius: 5px; width: auto; max-width: 90%; max-height: 85vh; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); display: flex; justify-content: center; align-items: center; }
+        .modal-image { display: block; max-width: 100%; max-height: calc(85vh - 40px); height: auto; width: auto; }
+        .modal-close { position: absolute; top: 0px; right: 15px; color: #aaa; font-size: 35px; font-weight: bold; line-height: 1; cursor: pointer; transition: color 0.3s ease; }
+        .modal-close:hover, .modal-close:focus { color: #fff; text-decoration: none; }
+        .clickable-image { cursor: pointer; }
+
+        /* --- START INTEGRATED COUNTDOWN TIMER CSS (HORIZONTAL UNIT LAYOUT) --- */
+        .guarantee-section .countdown#countdown { /* Container for all timer units */
+            font-size: 1.5rem; /* Base font size for numbers (27px if html base is 18px) */
+            color: var(--dark-text); /* Default text color for numbers */
+            display: flex; /* Arrange Day/Hour/Min/Sec units horizontally */
+            justify-content: center; /* Center the group of units */
+            align-items: stretch;
+            flex-wrap: wrap; /* Allow units to wrap on smaller screens */
+        }
+        .guarantee-section .countdown#countdown > span { /* Individual unit (e.g., "00 Days") */
+            display: inline-flex; /* Align number and label horizontally within this span */
+            align-items: baseline; /* Vertically align number and label along their text baseline */
+            justify-content: center; /* Center content if span is wider (due to min-width) */
+            padding: 0.5rem 0.8rem; /* Padding inside each unit box */
+            background-color: #e0e0e0; /* Background for each unit box */
+            margin: 0.2rem 0.4rem; /* Space around each unit box */
+            border-radius: 0.3rem;
+            min-width: auto; /* Let each unit determine its own width, or set fixed e.g., 100px */
+            font-weight: bold; /* Makes the number part bold */
+            line-height: 1.3; /* Line height for the number */
+        }
+        .guarantee-section .countdown#countdown > span .label { /* The "Days", "Hours" text */
+            font-size: 0.8rem; /* Approx 14.4px. Relative to html base, not parent span's 1.5rem. */
+            display: inline; /* Ensure label stays on the same line */
+            color: #343a40; /* Darker text for labels */
+            margin-left: 0.4em; /* Space between number and label (relative to label's font size) */
+            font-weight: normal; /* Labels not bold */
+            line-height: 1; /* Adjust if necessary */
+        }
+        .guarantee-section #expiredMessage {
+            color: var(--primary-red);
+            font-weight: bold;
+            margin-top: 10px;
+            font-size: 1.1rem;
+            display: block;
+            text-align: center;
+        }
+        /* --- END INTEGRATED COUNTDOWN TIMER CSS --- */
+
+    </style>
+</head>
+<body>
+
+    
+
+        
+        <!-- Transformation Story -->
+        <div id="transformation-story" class="transformation-story py-5">
+             <div class="container-fluid px-md-4 px-3">
+                 <h2 class="text-center mb-5" style="font-size:50px;">"Meet Sharmaine From Riverside, California—She Thought Luxury Leather Was Out of Reach..."</h2>
+                 <div class="row align-items-center">
+                     <div class="col-md-5 mb-4 mb-md-0">
+                        <div id="beforeCarousel" class="carousel slide shadow-sm" data-bs-ride="carousel" data-bs-interval="10000">
+                            <div class="carousel-indicators">
+                                <button type="button" data-bs-target="#beforeCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                                <button type="button" data-bs-target="#beforeCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                            </div>
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <img src="https://storage.googleapis.com/msgsndr/dC0ujeVga1kZlZsLqjZz/media/6838d44f5e83853a74bb78c8.jpeg" class="d-block w-100 clickable-image" alt="Before: Cloth Seats Main">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="https://storage.googleapis.com/msgsndr/dC0ujeVga1kZlZsLqjZz/media/6838d44fb7fe7080600471c8.jpeg" class="d-block w-100 clickable-image" alt="Light Grey Cloth Interior Before">
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#beforeCarousel" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#beforeCarousel" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                     </div>
+                     <div class="col-md-7">
+						<h4 style="color: var(--primary-red); font-size:30px;">Before the Transformation:</h4>
+                         <p>Sharmaine loved her powerful and versatile 2024 Ford F-150. It was her go-to truck for everything from daily commutes in Riverside to weekend projects and adventures. However, the standard light grey cloth seats in her trim level didn't quite match the truck's rugged capability or her desire for a more premium, comfortable, and stylish interior.</p>
+                         <p><strong>Before:</strong> The factory light grey cloth seats were functional but lacked the sophisticated look and luxurious feel Sharmaine craved. She found them prone to attracting dirt, less comfortable on longer drives, and they made her F-150's cabin feel a bit too utilitarian for her taste, as seen in the "before" images.</p>
+                         <p>She considered what it would have cost to get factory leather, either by stepping up to a higher trim level (like a Lariat or King Ranch) or as an expensive add-on package from the dealership, and the figures were substantial—a significant jump in price that felt out of reach.</p>
+                         <p>But then Sharmaine discovered <strong>LeatherTeck</strong>.</p>
+                     </div>
+                 </div>
+
+                 <div class="row align-items-center mt-5 flex-column-reverse flex-md-row">
+                     <div class="col-md-7">
+                         <h4 style="color: var(--primary-red); font-size:30px;">After the Transformation:</h4>
+                         <ul class="list-unstyled">
+                             <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Her 2024 Ford F-150 was completely transformed with rich, black premium-grade leather upholstery from LeatherTeck, as seen in the stunning "after" images.</li>
+                             <li class="mb-2"><i class="fas fa-check text-success me-2"></i>The new leather didn't just look incredible; it elevated the entire cabin, giving it a custom, high-end feel that far surpassed the original cloth.</li>
+                             <li class="mb-2"><i class="fas fa-check text-success me-2"></i>The fit and finish were so precise, it looked like an original factory luxury package, seamlessly integrating with her F-150's interior design.</li>
+                             <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Best of all? Sharmaine achieved this stunning upgrade for a fraction of what it would have cost to get factory leather from the dealership!</li>
+                         </ul>
+                         <p class="fst-italic">"I'm absolutely blown away!" Sharmaine exclaimed. "The transformation in my F-150 is incredible. It's not just more comfortable and stylish, but so practical too. LeatherTeck delivered genuine OEM quality without that hefty dealership price."</p>
+                     </div>
+                     <div class="col-md-5 mb-4 mb-md-0">
+                        <div id="afterCarousel" class="carousel slide shadow-sm" data-bs-ride="carousel" data-bs-interval="10000">
+                             <div class="carousel-indicators">
+                                <button type="button" data-bs-target="#afterCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                                <button type="button" data-bs-target="#afterCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                            </div>
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <img src="https://storage.googleapis.com/msgsndr/dC0ujeVga1kZlZsLqjZz/media/6838d218fc310798d264e4d1.jpeg" class="d-block w-100 clickable-image" alt="After: Leather Seats Main">
+                                </div>
+                                <div class="carousel-item">
+                                     <img src="https://storage.googleapis.com/msgsndr/dC0ujeVga1kZlZsLqjZz/media/6838d218c1a32037cd8a7dcd.jpeg" class="d-block w-100 clickable-image" alt="Black Leather Option After">
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#afterCarousel" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#afterCarousel" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                      </div>
+                 </div>
+
+                 <div class="text-center mt-5">
+					 <a href="https://leads.leatherteck.com/start-now-lets-get-you-leather" class="btn btn-red btn-lg px-5 py-3">START YOUR TRANSFORMATION</a>
+                 </div>
+             </div>
+         </div>
+
+        <!-- Product Details -->
+        <div id="product-details" class="product-details py-5">
+            <div class="container-fluid px-md-4 px-3">
+                <h2 class="text-center mb-4" style="font-size:50px;">"Introducing: The LeatherTeck Premium Leather Kit—Luxury, Comfort, and Confidence!"</h2>
+                <p class="text-center mb-5" style="font-size:30px;">Imagine stepping into your car and instantly feeling the difference: the soft touch of premium leather, the rich, elegant look that turns heads, and the unmistakable scent of luxury.</p>
+
+                 <div class="row">
+                     <div class="col-lg-6 mb-4">
+						<div class="card h-100 shadow">
+							<div class="card-body"><h3 class="card-title" style="font-size:40px;">Premium Automotive-Grade Leather</h3><ul class="list-unstyled mt-3"><li class="mb-2"><i class="fas fa-check text-success"></i><strong>Soft, supple, and luxurious</strong></li><li class="mb-2"><i class="fas fa-check text-success"></i><strong>Built for real life:</strong> Wipes clean effortlessly.</li><li class="mb-2"><i class="fas fa-check text-success"></i><strong>UV-treated for durability</strong></li><li class="mb-2"><i class="fas fa-check text-success"></i><strong>More durable than synthetics</strong></li></ul>
+							</div>
+						</div>
+					</div>
+                     <div class="col-lg-6 mb-4"> <div class="card h-100 shadow"><div class="card-body"><h3 class="card-title" style="font-size:40px;">Flawless, Custom-Tailored Fit</h3><ul class="list-unstyled mt-3"><li class="mb-2"><i class="fas fa-check text-success"></i><strong>Precision-cut for your specific vehicle.</strong></li><li class="mb-2"><i class="fas fa-check text-success"></i><strong>Custom-matched colors for a seamless look.</strong></li><li class="mb-2"><i class="fas fa-check text-success"></i><strong>Double-stitched seams for durability.</strong></li><li class="mb-2"><i class="fas fa-check text-success"></i><strong>Factory-style patterns.</strong></li></ul></div></div></div>
+                <h2 class="text-center mb-4" style="font-size:40px;">More Before and After Installation Transformations</h2>
+				                                         <!-- <ul class="list-unstyled">
+                                             <li class="mb-2" style="font-size:20px;"><i class="fas fa-tools text-success me-2"></i>DIY-friendly kits available.</li>
+                                             <li class="mb-2" style="font-size:20px;"><i class="fas fa-user-cog text-success me-2"></i>Professional installation options.</li>
+                                             <li class="mb-2" style="font-size:20px;"><i class="fas fa-box-open text-success me-2"></i>Front and back seats included.</li>
+                                         </ul> -->
+                    <!--  <div class="col-lg-12 mb-4">
+                         <div class="card shadow">
+                             <div class="card-body">
+                                 <h3 class="card-title" style="font-size:40px;">More Before and After Installation Transformations</h3>
+                                 <div class="row mt-3 align-items-center">
+                                     <div class="col-md-8">
+                                         <p style="color: white; font-size:24px;">Transformation #1:</p>
+                                         <div class="product-thumbnails mb-3">
+                                             <img src="https://services.leadconnectorhq.com/documents/download/hNKOE4ztYVdnYaxijDid" alt="Black Leather" class="clickable-image">
+                                             <img src="https://services.leadconnectorhq.com/documents/download/SIuaSRUdErgCl74m4NCy" alt="Grey Leather" class="clickable-image">
+                                             <img src="https://services.leadconnectorhq.com/documents/download/5M1yLf4DGxFo8eEoMLFb" alt="Tan Leather" class="clickable-image">
+                                             <img src="https://services.leadconnectorhq.com/documents/download/Ew48GIWWroAfcHdtv8b9" alt="Red Leather" class="clickable-image">
+                                         </div>
+                                     </div>
+									                                      <div class="col-md-8">
+                                         <p style="color: white; font-size:24px;">Transformation #2:</p>
+                                         <div class="product-thumbnails mb-3">
+                                             <img src="https://services.leadconnectorhq.com/documents/download/hNKOE4ztYVdnYaxijDid" alt="Black Leather" class="clickable-image">
+                                             <img src="https://services.leadconnectorhq.com/documents/download/SIuaSRUdErgCl74m4NCy" alt="Grey Leather" class="clickable-image">
+                                             <img src="https://services.leadconnectorhq.com/documents/download/5M1yLf4DGxFo8eEoMLFb" alt="Tan Leather" class="clickable-image">
+                                             <img src="https://services.leadconnectorhq.com/documents/download/Ew48GIWWroAfcHdtv8b9" alt="Red Leather" class="clickable-image">
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>  --> <!-- End of Transformation Column--> 
+					<div class="col-lg-6 mb-4">
+						<div class="card h-100 shadow">
+							<div class="card-body"><h3 class="card-title" style="font-size:40px;">Transformation #1</h3>
+                            <p style="color: white; font-size:24px;">2025 Dodge RAM 1500 Crew Cab</p>
+                        <img-comparison-slider value="70" class="hero-image-slider">
+                            <img slot="first" src="https://storage.googleapis.com/msgsndr/dC0ujeVga1kZlZsLqjZz/media/6838d2184047aa684b624899.jpeg" alt="After" style="object-fit: cover; width:100%; height:100%;"/>
+                            <img slot="second" src="https://storage.googleapis.com/msgsndr/dC0ujeVga1kZlZsLqjZz/media/6838d3056ae59ccc1b94dd97.jpeg" alt="Before" style="object-fit: cover; width:100%; height:100%;"/>
+                            <img slot="handle" class="custom-handle" src="https://storage.googleapis.com/msgsndr/dC0ujeVga1kZlZsLqjZz/media/682d03180f24490415baf694.svg" alt="Drag Handle">
+                        </img-comparison-slider>
+							</div>
+						</div>
+					</div> <!-- End of Transformation #1 -->
+					<div class="col-lg-6 mb-4">
+						<div class="card h-100 shadow">
+							<div class="card-body">
+							<h3 class="card-title" style="font-size:40px;">Transformation #2</h3>
+                            <p style="color: white; font-size:24px;">2024 Chevy Colorado</p>
+                        <img-comparison-slider value="70" class="hero-image-slider">
+                            <img slot="first" src="https://storage.googleapis.com/msgsndr/dC0ujeVga1kZlZsLqjZz/media/6838b7fcce21ce6e98aee020.jpeg" alt="After" style="object-fit: cover; width:100%; height:100%;"/>
+                            <img slot="second" src="https://storage.googleapis.com/msgsndr/dC0ujeVga1kZlZsLqjZz/media/6838b7fc4047aa5f82621a22.jpeg" alt="Before" style="object-fit: cover; width:100%; height:100%;"/>
+                            <img slot="handle" class="custom-handle" src="https://storage.googleapis.com/msgsndr/dC0ujeVga1kZlZsLqjZz/media/682d03180f24490415baf694.svg" alt="Drag Handle">
+                        </img-comparison-slider>
+							</div>
+						</div>
+					</div> <!-- End of Transformation #2 -->
+                 </div>
+             </div>
+         </div>
+
+        <!-- Trust Section -->
+        <div class="trust-section py-5">
+             <div class="container-fluid px-md-4 px-3"> <h2 class="text-center mb-5" style="font-size:50px;">"Why Hundreds Trust LeatherTeck"</h2> <div class="row"> <div class="col-md-6 col-lg-3 mb-4"><div class="card h-100 text-center shadow"><div class="card-body"><div class="display-3 mb-3"><i class="fas fa-medal"></i></div><h4>20+ Years Experience</h4><p>Perfecting premium leather upgrades.</p></div></div></div> <div class="col-md-6 col-lg-3 mb-4"><div class="card h-100 text-center shadow"><div class="card-body"><div class="display-3 mb-3"><i class="fas fa-car"></i></div><h4>Thousands Transformed</h4><p>Helping owners fall back in love with their cars.</p></div></div></div> <div class="col-md-6 col-lg-3 mb-4"><div class="card h-100 text-center shadow"><div class="card-body"><div class="display-3 mb-3"><i class="fas fa-gem"></i></div><h4>Premium Materials</h4><p>Highest-quality leather that outlasts.</p></div></div></div> <div class="col-md-6 col-lg-3 mb-4"><div class="card h-100 text-center shadow"><div class="card-body"><div class="display-3 mb-3"><i class="fas fa-headset"></i></div><h4>Expert Support</h4><p>Here for you every step of the way.</p></div></div></div> </div> </div>
+        </div>
+
+        <!-- Pricing Section -->
+        <div id="pricing-section" class="pricing-section py-5">
+             <div class="container-fluid px-md-4 px-3">
+                 <h2 class="text-center mb-5" style="font-size:50px;">"Stop Overpaying For Luxury"</h2>
+                 <div class="table-responsive shadow-sm rounded">
+                     <table class="table table-bordered mb-0">
+                         <thead class="table-dark">
+                             <tr>
+                                 <th>Feature</th>
+                                 <th class="text-center">LeatherTeck</th>
+                                 <th class="text-center">Katzkin</th>
+                                 <th class="text-center">Dealership Upgrade</th>
+                             </tr>
+                         </thead>
+                         <tbody>
+                             <tr>
+                                 <td>Premium Leather Quality</td>
+                                 <td class="text-center text-success">✓</td>
+                                 <td class="text-center text-success">✓</td>
+                                 <td class="text-center text-success">✓</td>
+                             </tr>
+                             <tr>
+                                 <td>Custom Fit For Your Vehicle</td>
+                                 <td class="text-center text-success">✓</td>
+                                 <td class="text-center text-success">✓</td>
+                                 <td class="text-center text-success">✓</td>
+                             </tr>
+                             <tr>
+                                 <td>Professional Look</td>
+                                 <td class="text-center text-success">✓</td>
+                                 <td class="text-center text-success">✓</td>
+                                 <td class="text-center text-success">✓</td>
+                             </tr>
+                             <tr>
+                                 <td>DIY Option Available</td>
+                                 <td class="text-center text-success">✓</td>
+                                 <td class="text-center text-danger">✗</td>
+                                 <td class="text-center text-danger">✗</td>
+                             </tr>
+                             <tr>
+                                 <td>Professional Install Option</td>
+                                 <td class="text-center text-success">✓</td>
+                                 <td class="text-center text-success">✓</td>
+                                 <td class="text-center text-success">✓</td>
+                             </tr>
+                             <tr>
+                                 <td>Warranty</td>
+                                 <td class="text-center">3-Year/36,000 Miles</td>
+                                 <td class="text-center">3-Year/36,000 Miles</td>
+                                 <td class="text-center">Varies</td>
+                             </tr>
+                             <tr class="table-price-highlight">
+                                 <td><strong>Typical Price (Installed)</strong></td>
+                                 <td class="text-center"><strong>Starting at $1,795</strong></td>
+                                 <td class="text-center"><strong>~$2,000 - $2,500</strong></td>
+                                 <td class="text-center"><strong>$3,000 - $10,000+</strong></td>
+                             </tr>
+                             <tr class="table-savings-highlight">
+                                 <td><strong>Potential Savings vs Dealer</strong></td>
+                                 <td class="text-center"><strong>Up to $8,200+</strong></td>
+                                 <td class="text-center"><strong>Significant Savings</strong></td>
+                                 <td class="text-center"><strong>$0</strong></td>
+                             </tr>
+                         </tbody>
+                     </table>
+                 </div>
+                 <p class="text-center mt-4" style="font-size:30px;"><strong>Get the premium look and feel without the dealership markup.</strong></p>
+                 <div class="text-center mt-4">
+                     <a href="https://leads.leatherteck.com/start-now-lets-get-you-leather" class="btn btn-red btn-lg px-5 py-3">SEE PRICING FOR YOUR VEHICLE</a>
+                 </div>
+             </div>
+        </div>
+
+        <!-- Guarantee Section -->
+        <div class="guarantee-section py-5">
+            <div class="container-fluid px-md-4 px-3">
+                <h2 class="text-center mb-5" style="font-size:40px;">"Our Triple Guarantee—Zero Risk, All Reward"</h2>
+                <div class="row">
+                    <div class="col-md-4 mb-4"><div class="card h-100 shadow"><div class="card-body text-center"><h3 class="card-title">✓ 100% Satisfaction Guarantee</h3><p class="card-text">If you're not completely in love with your new leather interior, we'll make it right—no questions asked.</p></div></div></div>
+                    <div class="col-md-4 mb-4"><div class="card h-100 shadow"><div class="card-body text-center"><h3 class="card-title">✓ 3-Year/36,000-Mile Warranty</h3><p class="card-text">Your investment is protected with our comprehensive warranty against manufacturing defects.</p></div></div></div>
+                    <div class="col-md-4 mb-4"><div class="card h-100 shadow"><div class="card-body text-center"><h3 class="card-title">✓ Perfect Fit Promise</h3><p class="card-text">If your LeatherTeck kit doesn't fit perfectly, we'll replace it or refund your purchase.</p></div></div></div>
+                </div>
+            
+
+        <!-- Process Section -->
+        <div id="process-section" class="process-section py-5">
+             <div class="container-fluid px-md-4 px-3"> <h2 class="text-center mb-5" style="font-size:50px;">"Transform Your Car In Three Simple Steps"</h2> <div class="row"> <div class="col-md-4 mb-4"><div class="card h-100 shadow"><div class="card-body text-center"><div class="display-1 mb-3">1️⃣</div><h3>Choose Your Kit</h3><p>Select your vehicle make, model, and year, then pick your preferred leather color and style.</p></div></div></div> <div class="col-md-4 mb-4"><div class="card h-100 shadow"><div class="card-body text-center"><div class="display-1 mb-3">2️⃣</div><h3>Place Your Order</h3><p>Our team prepares your custom-fitted kit, precisely tailored to your specifications.</p></div></div></div> <div class="col-md-4 mb-4"><div class="card h-100 shadow"><div class="card-body text-center"><div class="display-1 mb-3">3️⃣</div><h3>Transform Your Interior</h3><p>Install it yourself with our guide, or select professional installation at checkout.</p></div></div></div> </div> <p class="text-center mt-4" style="font-size:30px;"><strong>It's that simple! Your luxury interior awaits.</strong></p> <div class="text-center mt-4"> <a href="https://leads.leatherteck.com/start-now-lets-get-you-leather" class="btn btn-red btn-lg px-5 py-3">START MY TRANSFORMATION</a> </div> </div>
+        </div>
+
+        <!-- Final CTA -->
+        <div id="final-cta" class="final-cta py-5">
+             <div class="container-fluid px-md-4 px-3"> <h2 class="text-center mb-4" style="font-size:50px;">"Your Luxury Car Interior Is Just A Click Away"</h2> <div class="row justify-content-center"> <div class="col-lg-8"> <p class="text-center" style="font-size:30px;">Your car deserves more than "fine." It deserves first-class luxury. And you deserve to feel proud every time you get behind the wheel.</p> <div class="card p-4 my-4 shadow"> <h4 class="card-title" style="font-size:40px;">With LeatherTeck, You Get:</h4> <ul class="list-unstyled"> <li style="font-size:25px;"><strong><i class="fas fa-check text-success"></i>Premium, genuine leather specifically cut for your vehicle</strong></li> <li style="font-size:25px;"><strong><i class="fas fa-check text-success"></i>A factory-quality look that will impress anyone</strong></li> <li style="font-size:25px;"><strong><i class="fas fa-check text-success"></i>Durable, easy-to-clean surfaces</strong></li> <li style="font-size:25px;"><strong><i class="fas fa-check text-success"></i>Significant savings compared to dealership prices</strong></li> <li style="font-size:25px;"><strong><i class="fas fa-check text-success"></i>The pride of driving a car that truly reflects your style</strong></li> </ul> </div> <p class="text-center" style="font-size:25px;">Don't wait another day to experience the luxury and comfort that comes with a LeatherTeck interior.</p> <div class="text-center mt-5"> <a href="https://leads.leatherteck.com/start-now-lets-get-you-leather" class="btn btn-red btn-lg px-5 py-3">TRANSFORM MY CAR NOW</a> <p class="mt-3 small" style="font-size:25px;">Have questions? Visit <a href="https://leatherteck.com/">LeatherTeck.com</a> NOW!</p> </div> </div> </div> </div>
+        </div>
+
+        <!-- FAQ Section -->
+        <div class="faq-section py-5">
+             <div class="container-fluid px-md-4 px-3"> <h2 class="text-center mb-5" style="font-size:50px;">Frequently Asked Questions</h2> <div class="accordion" id="faqAccordion"> <div class="accordion-item mb-3 shadow-sm"><h2 class="accordion-header" id="headingOne"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"><strong>How long does installation take?</strong></button></h2><div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion"><div class="accordion-body">DIY installation typically takes 2-3 hours for front seats only, or 4-6 hours for a complete set. Professional installation can usually be completed in one day.</div></div></div> <div class="accordion-item mb-3 shadow-sm"><h2 class="accordion-header" id="headingTwo"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"><strong>Will the leather match my interior?</strong></button></h2><div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion"><div class="accordion-body">Absolutely. Our kits are custom-matched to your vehicle's interior color scheme for a seamless factory look.</div></div></div> <div class="accordion-item mb-3 shadow-sm"><h2 class="accordion-header" id="headingThree"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"><strong>Is this real leather?</strong></button></h2><div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion"><div class="accordion-body">Yes, all LeatherTeck kits feature genuine, premium automotive-grade leather—not vinyl or synthetic alternatives.</div></div></div> <div class="accordion-item mb-3 shadow-sm"><h2 class="accordion-header" id="headingFour"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour"><strong>Do I need special tools for installation?</strong></button></h2><div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion"><div class="accordion-body">Basic household tools are typically all you need. Our detailed instruction guides walk you through the process.</div></div></div> <div class="accordion-item mb-3 shadow-sm"><h2 class="accordion-header" id="headingFive"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive"><strong>What if I need help during installation?</strong></button></h2><div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#faqAccordion"><div class="accordion-body">Our customer support team is available by phone, email, or chat to assist you.</div></div></div> <div class="accordion-item shadow-sm"><h2 class="accordion-header" id="headingSix"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix"><strong>How does the warranty work?</strong></button></h2><div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix" data-bs-parent="#faqAccordion"><div class="accordion-body">Our 3-year/36,000-mile warranty covers manufacturing defects and premature wear. Contact support with photos if needed.</div></div></div> </div> </div></br>
+			 <div class="text-center">
+                    <a href="https://leads.leatherteck.com/start-now-lets-get-you-leather" class="btn btn-red btn-lg px-5 py-3 mt-3">START NOW</a>
+                </div>
+        </div>
+
+    </main>
+
+     <!-- Modal Structure (Initially Hidden) -->
+     <div id="imageModalOverlay" class="modal-overlay">
+         <div id="imageModalContent" class="modal-content">
+             <span id="modalCloseButton" class="modal-close">×</span>
+             <img id="modalPopupImage" class="modal-image" src="" alt="Enlarged View">
+         </div>
+     </div>
+
+    <!-- Bootstrap 5 JS Bundle (includes Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
+    <!-- Img Comparison Slider JS -->
+    <script defer src="https://unpkg.com/img-comparison-slider@8/dist/index.js"></script>
+
+    <!-- Custom JS (Includes Modal, Navbar Scroll Logic, and Countdown Timer) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // --- Image Modal Logic ---
+            const modalOverlay = document.getElementById('imageModalOverlay');
+            const modalImage = document.getElementById('modalPopupImage');
+            const modalClose = document.getElementById('modalCloseButton');
+            const clickableImages = document.querySelectorAll('.clickable-image');
+
+            function openModal(imageUrl) {
+                if (!modalOverlay || !modalImage) return;
+                modalImage.src = imageUrl;
+                modalOverlay.classList.add('modal-active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeModal() {
+                if (!modalOverlay || !modalImage) return;
+                modalOverlay.classList.remove('modal-active');
+                modalImage.src = '';
+                document.body.style.overflow = '';
+            }
+
+            clickableImages.forEach(img => {
+                img.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    openModal(this.src);
+                });
+            });
+
+            if (modalClose) modalClose.addEventListener('click', closeModal);
+
+            if (modalOverlay) {
+                modalOverlay.addEventListener('click', function(event) {
+                    if (event.target === modalOverlay) {
+                        closeModal();
+                    }
+                });
+            }
+
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape' && modalOverlay && modalOverlay.classList.contains('modal-active')) {
+                    closeModal();
+                }
+            });
+            // --- End Image Modal Logic ---
+
+
+            // --- Navbar Scroll Logic ---
+            const navbar = document.getElementById('main-navbar');
+            const scrollThreshold = 50;
+
+            if (navbar) {
+                window.addEventListener('scroll', function() {
+                    if (window.scrollY > scrollThreshold) {
+                        navbar.classList.add('navbar-scrolled');
+                    } else {
+                        navbar.classList.remove('navbar-scrolled');
+                    }
+                });
+            } else {
+                console.warn("Navbar element with ID 'main-navbar' not found.");
+            }
+            // --- End Navbar Scroll Logic ---
+
+            // --- Img Comparison Slider Mousemove Logic ---
+            const heroSlider = document.querySelector('.hero-section img-comparison-slider.hero-image-slider');
+
+            if (heroSlider) {
+                heroSlider.addEventListener('mousemove', (event) => {
+                    if (event.buttons !== 0) {
+                        return;
+                    }
+                    const rect = heroSlider.getBoundingClientRect();
+                    const sliderWidth = rect.width;
+                    if (sliderWidth <= 0) {
+                        return;
+                    }
+                    let offsetX = event.clientX - rect.left;
+                    let newValue = (offsetX / sliderWidth) * 100;
+                    newValue = Math.max(0, Math.min(100, newValue));
+                    heroSlider.value = newValue;
+                });
+            } else {
+                console.warn("Hero image comparison slider not found for mousemove enhancement.");
+            }
+            // --- End Img Comparison Slider Mousemove Logic ---
+
+            // --- START OF INTEGRATED COUNTDOWN TIMER CODE ---
+            const targetDate = new Date();
+            targetDate.setMonth(targetDate.getMonth() + 1);
+
+            const daysEl = document.getElementById('days');
+            const hoursEl = document.getElementById('hours');
+            const minutesEl = document.getElementById('minutes');
+            const secondsEl = document.getElementById('seconds');
+            const countdownEl = document.getElementById('countdown'); 
+
+            function updateCountdown() {
+                const now = new Date().getTime();
+                const timeLeft = targetDate.getTime() - now;
+
+                if (timeLeft < 0) {
+                    clearInterval(timerInterval);
+                    if (daysEl) daysEl.innerHTML = `00<span class="label">Days</span>`;
+                    if (hoursEl) hoursEl.innerHTML = `00<span class="label">Hours</span>`;
+                    if (minutesEl) minutesEl.innerHTML = `00<span class="label">Mins</span>`;
+                    if (secondsEl) secondsEl.innerHTML = `EXPIRED<span class="label">&nbsp;</span>`;
+                    
+                    if (countdownEl && !document.getElementById('expiredMessage')) {
+                        const expiredMsg = document.createElement('p');
+                        expiredMsg.id = 'expiredMessage';
+                        expiredMsg.textContent = "This special offer has ended.";
+                        countdownEl.parentNode.insertBefore(expiredMsg, countdownEl.nextSibling);
+                    }
+                    return;
+                }
+
+                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+                if (daysEl) daysEl.innerHTML = `${String(days).padStart(2, '0')}<span class="label">Days</span>`;
+                if (hoursEl) hoursEl.innerHTML = `${String(hours).padStart(2, '0')}<span class="label">Hours</span>`;
+                if (minutesEl) minutesEl.innerHTML = `${String(minutes).padStart(2, '0')}<span class="label">Mins</span>`;
+                if (secondsEl) secondsEl.innerHTML = `${String(seconds).padStart(2, '0')}<span class="label">Secs</span>`;
+            }
+
+            if (daysEl && hoursEl && minutesEl && secondsEl) { 
+                const timerInterval = setInterval(updateCountdown, 1000);
+                updateCountdown(); 
+            }
+            // --- END OF INTEGRATED COUNTDOWN TIMER CODE ---
+
+        }); // End DOMContentLoaded
+    </script>
+
+</body>
+</html>
