@@ -1,51 +1,55 @@
-# Temporary/scratch scripts (use product_cli.py instead)
-check_*.py
-clean_*.py
-fill_*.py
-add_*.py
-fetch_*.py
-update_*.py
-compare_*.py
-convert_*.py
-extract_*.py
-fix_*.py
-verify_*.py
-deep_*.py
-split_*.py
-
-# Excel temp files
-~$*.xlsx
-
-# Python cache
+# Python
 __pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+*.egg-info/
+
+# PyInstaller
+build/
+*.spec
+
+# Development files
 *.pyc
 *.pyo
-
-# Data files (keep in data/ folder instead)
-*.csv
-*.xlsx
-!data/*.csv
-!data/*.xlsx
-
-# Logs and checkpoints
-*.log
-*_checkpoint.json
-
-# Images (keep in images/ folder)
-*.png
-*.jpg
-*.jpeg
-!images/*.png
-!images/*.jpg
-!images/*.jpeg
-
-# PDFs
-*.pdf
-
-# Temporary text files
-matched_products_full_list.txt
-missing_trims_report.csv
-nul
+.DS_Store
+.idea/
+.vscode/
 
 # Backup files
-*.backup
+products_backup_*.json
+
+# Build scripts and tools
+build_exe.bat
+create_icon.py
+create_simple_icon.py
+product_manager.py
+product_manager_complete.py
+git_products_gui.py
+
+# Scraper scripts
+scrapers/
+scripts/
+
+# Data files (except main products.json)
+data/
+*.csv
+*.xlsx
+katzkin_from_excel.json
+unmatched.json
+
+# HTML development files
+html_pages/
+ghl-sections/
+funnels2.html
+dropdown_data.js
+
+# Images
+images/
+
+# Documentation
+FUNNEL-DESIGN-NOTES.md
+CLAUDE.md

@@ -1,7 +1,0 @@
-Handle,Title,Body (HTML),Included in Online Store,Image Src,Option1 Name,Option1 Value,Option2 Name,Option2 Value,Option3 Name,Option3 Value,Variant Price,Variant Compare At Price,Track Inventory,Allow Out of Stock Purchases,Available Quantity,SKU,Weight Value,Weight Unit,Dimension Length,Dimension Width,Dimension Height,Dimension Unit,Product Label Enable,Label Title,Label Start Date,Label End Date,SEO Title,SEO Description
-product-1,T-shirt,Cool Fancy Tshirts,TRUE,https://storage.googleapis.com/msgsndr/9Fg4Eq8hOKTzQw3oJ957/media/668d3a1068403e4e7c92c65a.jpeg,Size,M,Color,Black,,,120,150,TRUE,TRUE,100,20,10,kg,100,100,100,cm,TRUE,Featured,2024-07-18 15:00,2024-08-17 15:00,Seo Title,The description of the t-shirt
-product-1,,,,https://storage.googleapis.com/msgsndr/9Fg4Eq8hOKTzQw3oJ957/media/668d398f66cf904bcabbcfda.jpeg,,M,,Yellow,,,110,140,,,120,,1000,g,1,1,1,m,,,,,,
-product-1,,,,,,S,,Black,,,90,120,,,140,,22,lb,39,39,39,In,,,,,,
-product-2,Shirt,Formal Shirts,TRUE,https://storage.googleapis.com/msgsndr/9Fg4Eq8hOKTzQw3oJ957/media/668d39818e395d6dfbd66986.webp,Size,L,Color,Red,,,200,220,FALSE,FALSE,,,21,oz,,,,,FALSE,,,,,
-product-2,,,,,,L,,Orange,,,220,250,,,,,,,,,,,,,,,,
-product-3,Jeans,Denim Jeans,TRUE,https://storage.googleapis.com/msgsndr/9Fg4Eq8hOKTzQw3oJ957/media/668d3a2e8e395d84cad66a4d.jpeg,Size,32,Color,Black,,,1000,1200,,,,,,,,,,,,,,,,
